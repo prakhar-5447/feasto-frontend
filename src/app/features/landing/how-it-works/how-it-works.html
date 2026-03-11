@@ -1,0 +1,26 @@
+<section class="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <h3>How It Works</h3>
+      <p>Order your favorite food in just 4 simple steps</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card" *ngFor="let step of steps; let i = index">
+        <div class="content">
+          <div class="icon-wrapper">
+            <div class="icon-circle">
+              <fa-icon [icon]="step.icon"></fa-icon>
+            </div>
+            <div class="step-number">
+              {{ step.step }}
+            </div>
+          </div>
+          <h4>{{ step.title }}</h4>
+          <p>{{ step.description }}</p>
+        </div>
+        <div class="connector" *ngIf="i < steps.length - 1">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

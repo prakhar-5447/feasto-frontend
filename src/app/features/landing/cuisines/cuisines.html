@@ -1,0 +1,19 @@
+<section class="popular-cuisines">
+  <div class="container">
+    <div class="section-header">
+      <h3>Popular Cuisines</h3>
+      <p>Explore food from different cuisines</p>
+    </div>
+    <div class="cuisine-grid">
+      <div class="cuisine-card" *ngFor="let cuisine of cuisines">
+        <div class="image-wrapper">
+          <img [src]="cuisine.image" [alt]="cuisine.name" />
+          <div class="overlay">
+            <h4>{{ cuisine.name }}</h4>
+            <p>{{ cuisine.restaurants }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

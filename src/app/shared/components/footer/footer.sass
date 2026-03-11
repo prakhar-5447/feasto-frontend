@@ -1,0 +1,77 @@
+@use '../../../../styles/index' as *
+
+.footer
+    background: $color-text-primary
+    color: #d1d5db
+    padding: 60px 0
+
+    .container
+        max-width: 1200px
+        margin: auto
+        padding: 0 16px
+
+    .footer-grid
+        display: grid
+        grid-template-columns: 1fr
+        gap: 32px
+        margin-bottom: 40px
+
+        @media (min-width: 768px)
+            grid-template-columns: repeat(4,1fr)
+
+    h4
+        color: white
+        font-size: 22px
+        font-weight: 700
+        margin-bottom: 12px
+
+    h5
+        color: white
+        font-weight: 600
+        margin-bottom: 14px
+
+    p
+        font-size: 14px
+        line-height: 1.6
+
+    ul
+        list-style: none
+        padding: 0
+
+        li
+            margin-bottom: 8px
+
+            a
+                font-size: 14px
+                color: #d1d5db
+                text-decoration: none
+                transition: color .2s
+
+                &:hover
+                    color: #f97316
+
+    .social-icons
+        display: flex
+        gap: 12px
+
+        a
+            width: 40px
+            height: 40px
+            background: #1f2937
+            border-radius: 50%
+            display: flex
+            align-items: center
+            justify-content: center
+            color: #d1d5db
+            font-size: 18px
+            transition: background .2s
+
+            &:hover
+                background: $color-primary
+                color: white
+
+    .footer-bottom
+        border-top: 1px solid #1f2937
+        padding-top: 24px
+        text-align: center
+        font-size: 14px
