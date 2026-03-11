@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faLocationDot
@@ -6,7 +7,8 @@ import {
 
 @Component({
   selector: 'app-navbar',
-  imports: [FontAwesomeModule],
+  standalone: true,
+  imports: [FontAwesomeModule, RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.sass',
 })

@@ -10,12 +10,10 @@ export const routes: Routes = [
     {
         path: '',
         loadComponent: () => LandingLayout,
-
         children: [
             {
                 path: '',
-                loadComponent: () =>
-                    Landing
+                loadComponent: () => Landing
             }
         ]
     },
@@ -23,7 +21,6 @@ export const routes: Routes = [
     {
         path: 'auth',
         loadComponent: () => AuthLayout,
-
         children: [
             {
                 path: 'login',

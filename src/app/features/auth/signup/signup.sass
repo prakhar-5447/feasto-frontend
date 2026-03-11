@@ -1,0 +1,121 @@
+@use '../../../../styles/index' as *
+
+.signup-card
+    background: $color-white
+    border-radius: 16px
+    padding: 32px
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1)
+
+    .header
+        text-align: center
+        margin-bottom: 30px
+
+        .icon-wrapper
+            width: 64px
+            height: 64px
+            margin: 0 auto 16px
+            display: flex
+            align-items: center
+            justify-content: center
+            background: $color-primary-light
+            border-radius: 999px
+
+            fa-icon
+                color: $color-primary
+                font-size: 28px
+        .title
+            font-size: 28px
+            font-weight: 700
+            color: $color-text-primary
+            margin-bottom: 8px
+
+        .subtitle
+            color: $color-text-secondary
+            font-size: 15px
+    .form
+        display: flex
+        flex-direction: column
+        gap: 12px
+        label
+            font-size: 14px
+            font-weight: 500
+            color: $color-text-dark
+            display: block
+        .phone-input
+            display: flex
+            gap: 8px
+            margin-bottom: 12px
+
+            .country-code
+                width: 64px
+                display: flex
+                align-items: center
+                justify-content: center
+                border: 1px solid $color-border
+                border-radius: 8px
+                background: $color-white
+                font-weight: 500
+                color: $color-text-dark
+
+            input
+                width: 100%
+                padding: 10px 12px
+                border-radius: 8px
+                border: 1px solid $color-border
+                font-size: 14px
+                background-color: #f0f0f0
+                &:focus
+                    outline: none
+                    border-color: $color-text-muted
+                    box-shadow: 0 0 0 2px rgba($color-primary, 0.15)
+
+        button
+            padding: 12px
+            border: none
+            border-radius: 6px
+            background: #ea580c
+            color: white
+            cursor: pointer
+
+            &:disabled
+                background: #ccc
+                cursor: not-allowed
+
+        .login-text
+            text-align: center
+            font-size: 14px
+            color: $color-text-secondary
+            margin: 12px
+            a
+                color: $color-primary
+                font-weight: 600
+                text-decoration: none
+
+                &:hover
+                    color: $color-primary-hover
+
+        .otp-input
+            text-align: center
+            font-size: 22px
+            letter-spacing: 4px
+            margin-bottom: 12px
+            background-color: #f0f0f0
+
+        .resend
+            text-align: center
+            font-size: 14px
+            color: $color-text-secondary
+
+            button
+                background: none
+                border: none
+                color: $color-primary
+                font-weight: 500
+                cursor: pointer
+                padding: 0
+
+        .phone-summary
+            padding: 10px
+            background: $color-bg-light-orange
+            border: 1px solid #fed7aa
+            border-radius: 6px

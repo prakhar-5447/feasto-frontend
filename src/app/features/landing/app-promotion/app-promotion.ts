@@ -7,6 +7,7 @@ import {
 
 @Component({
   selector: 'app-app-promotion',
+  standalone: true,
   imports: [FontAwesomeModule],
   templateUrl: './app-promotion.html',
   styleUrl: './app-promotion.sass',

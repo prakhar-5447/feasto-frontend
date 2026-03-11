@@ -7,6 +7,7 @@ import { AppPromotion } from "./app-promotion/app-promotion";
 
 @Component({
   selector: 'app-landing',
+  standalone: true,
   imports: [Hero, WhyChooseFeasto, Cuisines, HowItWorks, AppPromotion],
   templateUrl: './landing.html',
   styleUrl: './landing.sass',

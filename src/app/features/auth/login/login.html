@@ -1,1 +1,66 @@
-<p>login works!</p>
+<div class="login-card">
+    <div class="header">
+        <div class="icon-wrapper">
+            <fa-icon [icon]="faMobileScreen"></fa-icon>
+        </div>
+        <h1 class="title">Welcome to Feasto</h1>
+        @if(step === 'phone'){
+        <p class="subtitle">
+            Enter your mobile number to continue
+        </p>
+        }
+        @if(step === 'otp'){
+        <p class="subtitle">
+            Enter the OTP sent to your mobile
+        </p>
+        }
+    </div>
+
+    <!-- PHONE STEP -->
+    @if(step === 'phone'){
+    <form (ngSubmit)="handleSendOTP()" class="form">
+        <label>Mobile Number</label>
+        <div class="phone-input">
+            <div class="country-code">
+                +91
+            </div>
+            <input type="tel" placeholder="Enter 10-digit mobile number" [value]="phoneNumber"
+                (input)="onPhoneChange($any($event.target).value)" />
+        </div>
+        <button type="submit" [disabled]="loading || phoneNumber.length !== 10">
+            {{ loading ? 'Sending OTP...' : 'Send OTP' }}
+        </button>
+        <p class="signup-text">
+            New to Feasto?
+            <a routerLink="/auth/signup">Create Account</a>
+        </p>
+        <p class="terms">
+            By continuing you agree to our Terms & Privacy Policy
+        </p>
+    </form>
+    }
+
+    <!-- OTP STEP -->
+    @if(step === 'otp'){
+    <form (ngSubmit)="handleVerifyOTP()" class="form">
+        <label>Enter OTP</label>
+        <p class="otp-info">
+            Sent to +91 {{ phoneNumber }}
+            <button type="button" (click)="step='phone'">
+                Change
+            </button>
+        </p>
+        <input type="text" placeholder="Enter 6-digit OTP" [value]="otp"
+            (input)="onOtpChange($any($event.target).value)" class="otp-input" />
+        <button type="submit" [disabled]="loading || otp.length !== 6">
+            {{ loading ? 'Verifying...' : 'Verify & Continue' }}
+        </button>
+        <p class="resend">
+            Didn't receive OTP?
+            <button type="button" (click)="handleResendOTP()">
+                Resend
+            </button>
+        </p>
+    </form>
+    }
+</div>

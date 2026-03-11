@@ -5,7 +5,8 @@
       <p>Order your favorite food in just 4 simple steps</p>
     </div>
     <div class="steps-grid">
-      <div class="step-card" *ngFor="let step of steps; let i = index">
+      @for(step of steps;track steps;let i = $index){
+      <div class="step-card">
         <div class="content">
           <div class="icon-wrapper">
             <div class="icon-circle">
@@ -18,9 +19,12 @@
           <h4>{{ step.title }}</h4>
           <p>{{ step.description }}</p>
         </div>
-        <div class="connector" *ngIf="i < steps.length - 1">
-        </div>
+        @if(i<steps.length-1){ <div class="connector">
       </div>
+      }
     </div>
+
+    }
+  </div>
   </div>
 </section>

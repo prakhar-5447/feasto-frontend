@@ -5,6 +5,7 @@ import { Footer } from "../../shared/components/footer/footer";
 
 @Component({
   selector: 'app-landing-layout',
+  standalone: true,
   imports: [Navbar, RouterOutlet, Footer],
   templateUrl: './landing-layout.html',
   styleUrl: './landing-layout.sass',

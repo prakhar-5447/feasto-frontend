@@ -6,6 +6,7 @@ import {
 
 @Component({
   selector: 'app-hero',
+  standalone: true,
   imports: [FontAwesomeModule],
   templateUrl: './hero.html',
   styleUrl: './hero.sass',

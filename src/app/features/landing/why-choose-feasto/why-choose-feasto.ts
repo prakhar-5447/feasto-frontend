@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faClock,
@@ -10,7 +9,8 @@ import {
 
 @Component({
   selector: 'app-why-choose-feasto',
-  imports: [CommonModule, FontAwesomeModule],
+   standalone: true,
+  imports: [FontAwesomeModule],
   templateUrl: './why-choose-feasto.html',
   styleUrl: './why-choose-feasto.sass',
 })

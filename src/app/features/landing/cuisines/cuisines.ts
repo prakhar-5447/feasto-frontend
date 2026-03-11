@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cuisines',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [],
   templateUrl: './cuisines.html',
   styleUrl: './cuisines.sass',
 })

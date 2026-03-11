@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faMagnifyingGlass, faLocationDot, faCreditCard, faBox,
@@ -7,7 +6,8 @@ import {
 
 @Component({
   selector: 'app-how-it-works',
-  imports: [CommonModule, FontAwesomeModule],
+  standalone: true,
+  imports: [FontAwesomeModule],
   templateUrl: './how-it-works.html',
   styleUrl: './how-it-works.sass',
 })

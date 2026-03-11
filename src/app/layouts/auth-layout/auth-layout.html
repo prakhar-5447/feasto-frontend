@@ -1,1 +1,11 @@
-<p>auth-layout works!</p>
+<div class="auth-container">
+  <div class="auth-content">
+    <a routerLink="/" class="back-link">
+      <fa-icon [icon]="faArrowLeft"></fa-icon>
+      Back to home
+    </a>
+    <div class="page">
+    <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

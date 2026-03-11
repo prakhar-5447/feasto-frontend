@@ -4,6 +4,7 @@ import { faFacebook, faTwitter, faYoutube, faInstagram } from '@fortawesome/free
 
 @Component({
   selector: 'app-footer',
+  standalone: true,
   imports: [FontAwesomeModule],
   templateUrl: './footer.html',
   styleUrl: './footer.sass',

@@ -5,7 +5,8 @@
       <p>Explore food from different cuisines</p>
     </div>
     <div class="cuisine-grid">
-      <div class="cuisine-card" *ngFor="let cuisine of cuisines">
+      @for( cuisine of cuisines;track cuisines;let i=$index){
+      <div class="cuisine-card">
         <div class="image-wrapper">
           <img [src]="cuisine.image" [alt]="cuisine.name" />
           <div class="overlay">
@@ -14,6 +15,7 @@
           </div>
         </div>
       </div>
+      }
     </div>
   </div>
 </section>
