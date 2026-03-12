@@ -1,4 +1,4 @@
-<div class="login-card">
+<div class="auth-card">
     <div class="header">
         <div class="icon-wrapper">
             <fa-icon [icon]="faMobileScreen"></fa-icon>
@@ -14,11 +14,8 @@
             Enter the OTP sent to your mobile
         </p>
         }
-    </div>
-
-    <!-- PHONE STEP -->
-    @if(step === 'phone'){
-    <form (ngSubmit)="handleSendOTP()" class="form">
+    </div> @if(step === 'phone'){
+    <form (ngSubmit)="sendOTP()" class="form">
         <label>Mobile Number</label>
         <div class="phone-input">
             <div class="country-code">
@@ -30,19 +27,10 @@
         <button type="submit" [disabled]="loading || phoneNumber.length !== 10">
             {{ loading ? 'Sending OTP...' : 'Send OTP' }}
         </button>
-        <p class="signup-text">
-            New to Feasto?
-            <a routerLink="/auth/signup">Create Account</a>
-        </p>
-        <p class="terms">
-            By continuing you agree to our Terms & Privacy Policy
-        </p>
     </form>
     }
-
-    <!-- OTP STEP -->
     @if(step === 'otp'){
-    <form (ngSubmit)="handleVerifyOTP()" class="form">
+    <form (ngSubmit)="verifyOTP()" class="form">
         <label>Enter OTP</label>
         <p class="otp-info">
             Sent to +91 {{ phoneNumber }}
@@ -50,16 +38,34 @@
                 Change
             </button>
         </p>
-        <input type="text" placeholder="Enter 6-digit OTP" [value]="otp"
-            (input)="onOtpChange($any($event.target).value)" class="otp-input" />
+        <div class="otp-container">
+            @for(box of otpArray; track $index){
+            <input #otpInput type="text" maxlength="1" inputmode="numeric" (input)="onOtpInput($event,$index)"
+                (keydown)="onOtpKeydown($event,$index)" />
+            }
+        </div>
         <button type="submit" [disabled]="loading || otp.length !== 6">
             {{ loading ? 'Verifying...' : 'Verify & Continue' }}
         </button>
         <p class="resend">
             Didn't receive OTP?
-            <button type="button" (click)="handleResendOTP()">
+            <button type="button" (click)="resendOtp()">
                 Resend
             </button>
+        </p>
+    </form>
+    }
+    @if(step === 'details'){
+    <form (ngSubmit)="completeSignup()" class="form">
+        <label>Your Name</label>
+        <input type="text" [(ngModel)]="name" name="name" placeholder="Enter your name" />
+        <label>Email (optional)</label>
+        <input type="email" [(ngModel)]="email" name="email" placeholder="Enter email" />
+        <button type="submit">
+            Complete Signup
+        </button>
+        <p class="terms">
+            By continuing you agree to our Terms & Privacy Policy
         </p>
     </form>
     }
