@@ -5,7 +5,7 @@
       <p>Explore food from different cuisines</p>
     </div>
     <div class="cuisine-grid">
-      @for( cuisine of cuisines;track cuisines;let i=$index){
+      @for( cuisine of cuisines;track $index){
       <div class="cuisine-card">
         <div class="image-wrapper">
           <img [src]="cuisine.image" [alt]="cuisine.name" />

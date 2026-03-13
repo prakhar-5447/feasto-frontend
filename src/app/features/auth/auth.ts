@@ -10,6 +10,7 @@ type AuthStep = 'phone' | 'otp' | 'details';
 
 @Component({
   selector: 'app-auth',
+  standalone: true,
   imports: [FormsModule, FontAwesomeModule],
   templateUrl: './auth.html',
   styleUrl: './auth.sass',

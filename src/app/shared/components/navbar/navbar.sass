@@ -1,77 +1,156 @@
 @use '../../../../styles/index' as *
 
 .header
-    position: sticky
-    top: 0
-    z-index: 50
     width: 100%
     background: $color-white
-    border-bottom: 1px solid $color-border
 
     .container
         max-width: 1200px
         margin: 0 auto
         padding: 0 16px
-        height: 64px
+        height: 72px
         display: flex
         align-items: center
         justify-content: space-between
+        gap: 16px
 
         .left
             display: flex
             align-items: center
             gap: 32px
-
+            flex: 1
             .logo
                 font-size: 24px
                 font-weight: 700
                 color: $color-primary
 
-            .location
+            .search
+                display: flex
+                gap: 16px
+                align-items: center
+                background: $color-white
+                padding: 12px 0px
+                border-radius: 6px
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1)
+                border: 1px solid rgba(0,0,0,0.1)
+                width: 100%
+                max-width: 720px
+                .box
+                    position: relative
+                    padding: 0px 8px
+                    width: 100%
+                    &:first-child
+                        border-right: 1px solid $color-border
+                        max-width: 280px
+                        .dropdown
+                            width: 320px
+
+                    .display
+                        width: 100%
+                        display: flex
+                        align-items: center
+                        gap: 0px
+                        cursor: pointer
+                        width: 100%
+
+                        fa-icon
+                            font-size: 18px
+                            color: $color-primary
+
+                        input
+                            color: $color-text-muted
+                            width: 100%
+                            font-size: 16px
+                            height: 28px
+                            padding: 0 8px
+                            border: none
+                            border-radius: 6px
+                            font-weight: 500
+                            &:focus
+                                outline: none
+                                border-color: $color-text-muted
+
+                    .dropdown
+                        position: absolute
+                        top: 54px
+                        left: 0
+                        max-height: 720px
+                        background: $color-white
+                        box-shadow: 0 6px 18px rgba(0,0,0,0.1)
+                        z-index: 10
+                        border-radius: 8px
+                        overflow: hidden
+                        width: 100%
+
+                        .suggestion
+                            width: 100%
+                            font-size: 16px
+                            color: $color-text-secondary
+                            cursor: pointer
+                            padding: 18px 16px
+                            &:not(:last-child)
+                                border-bottom: 1px solid $color-border
+                            &:hover
+                                background: #f8f8f8
+
+                        .gps-btn
+                            width: 100%
+                            display: flex
+                            align-items: flex-start
+                            justify-content: flex-start
+                            border: none
+                            background: none
+                            cursor: pointer
+                            font-size: 14px
+                            gap: 12px
+                            padding: 16px 16px
+
+                            .gps-text
+                                display: flex
+                                flex-direction: column
+                                gap: 8px
+                                align-items: flex-start
+                                font-size: 16px
+                                color: $color-primary
+                                p
+                                    color: $color-text-muted
+                                    font-size: 14px
+                            fa-icon
+                                font-size: 18px
+                                color: $color-primary
+                            &:hover
+                                background: #f8f8f8
+
+        .nav
+            width: auto
+            display: flex
+            align-items: center
+            gap: 16px
+
+            .btn
+                width: auto
                 display: flex
                 align-items: center
                 gap: 8px
-                color: $color-text-secondary
+                padding: 12px 16px
+                border-radius: 6px
+                cursor: pointer
+                border: none
                 font-size: 14px
+                &:first-child
+                    font-weight: 500
+                    background: $color-white
+                fa-icon
+                    font-size: 18px
 
-    .nav
-        display: flex
-        align-items: center
-        gap: 16px
+            .auth
+                background: $color-primary
+                color: $color-white
+                font-weight: 600
 
-        .btn
-            display: flex
-            align-items: center
-            gap: 8px
-            padding: 6px 12px
-            border-radius: 6px
-            cursor: pointer
-            font-size: 14px
-
-            fa-icon
-                font-size: 18px
-
-        .btn-ghost
-            border: none
-            background: transparent
-
-        .btn-outline
-            border: 1px solid $color-border
-            background: $color-white
-
-        .login
-            border: none
-            font-weight: 500
-
-        .signin
-            background: $color-primary
-            color: $color-white
-            font-weight: 600
-            padding: 12px 16px
-
-@media (max-width: 768px)
+@media (max-width: 968px)
     .header
         .container
             .left
-                .location
+                .search
                     display: none

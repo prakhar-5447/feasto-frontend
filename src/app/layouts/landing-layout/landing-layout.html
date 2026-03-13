@@ -1,5 +1,11 @@
-<app-navbar></app-navbar>
+<app-navbar (openAuth)="openAuth()"></app-navbar>
 <main class="landing-main">
   <router-outlet></router-outlet>
 </main>
+@if(showAuthModal){
+<app-modal (close)="closeAuth()">
+    <app-auth></app-auth>
+</app-modal>
+}
+
 <app-footer></app-footer>
