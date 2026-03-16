@@ -1,0 +1,33 @@
+<div class="ads-section">
+    <div class="carousel-wrapper">
+        <div class="ads-container" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+            @for(ad of ads; track ad.id){
+            <div class="carousel-slide">
+                <div class="ad-card">
+                    <img [src]="ad.image" [alt]="ad.title">
+                    <div class="overlay">
+                        <h3>{{ad.title}}</h3>
+                        <p>{{ad.subtitle}}</p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <!-- navigation -->
+        <button class="nav prev" (click)="prev()"><fa-icon [icon]="faArrowLeft"></fa-icon></button>
+        <button class="nav next" (click)="next()"><fa-icon [icon]="faArrowRight"></fa-icon></button>
+
+    </div>
+
+    <!-- dots -->
+    <div class="dots">
+
+        @for(ad of ads; track ad.id; let i = $index){
+        <span class="dot" [class.active]="i === currentIndex" (click)="goTo(i)">
+        </span>
+        }
+
+    </div>
+
+</div>

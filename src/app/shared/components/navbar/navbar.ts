@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
+import { LocationService } from '../../../core/services/location.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +19,6 @@ export class Navbar {
   faLocationDot = faLocationDot;
   faLocationCrosshairs = faLocationCrosshairs;
   faMagnifyingGlass = faMagnifyingGlass;
-  mapboxToken = environment.mapboxToken;
 
   selectedLocation = 'Select Location';
   locationQuery = '';
@@ -30,7 +29,7 @@ export class Navbar {
   restaurantQuery = '';
   restaurantResults: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private locationService: LocationService) { }
 
   toggleLocationDropdown() {
     this.showRestaurantDropdown = false;
@@ -49,13 +48,10 @@ export class Navbar {
       return;
     }
 
-    const url =
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/` +
-      `${this.locationQuery}.json?access_token=${this.mapboxToken}&limit=5&country=in`;
-
-    this.http.get<any>(url).subscribe(res => {
-      this.locationResults = res.features;
-    });
+    this.locationService.search(this.locationQuery)
+      .subscribe((data: any) => {
+        this.locationResults = data;
+      });
   }
 
   selectLocation(item: any) {
@@ -66,21 +62,20 @@ export class Navbar {
   }
 
   detectLocation() {
-
-    navigator.geolocation.getCurrentPosition(position => {
-
-      const { latitude, longitude } = position.coords;
-
-      const url =
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/` +
-        `${longitude},${latitude}.json?access_token=${this.mapboxToken}`;
-
-      this.http.get<any>(url).subscribe(res => {
-        this.selectedLocation = res.features[0].place_name;
-      });
-
-    });
-
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        const { latitude, longitude } = position.coords;
+        this.locationService
+          .reverseGeocode(latitude, longitude)
+          .subscribe((data: any) => {
+            this.selectedLocation = data.place_name;
+          });
+      },
+      error => {
+        console.error(error);
+        alert('Location permission denied');
+      }
+    );
   }
 
   searchRestaurant() {

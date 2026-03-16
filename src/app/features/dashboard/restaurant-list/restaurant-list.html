@@ -1,0 +1,11 @@
+<div class="restaurant-section">
+    <h2>
+        {{ selectedCategory ? selectedCategory + ' Restaurants' : 'Top Restaurants Near You' }}
+    </h2>
+    <div class="restaurant-grid">
+        @for(restaurant of restaurants; track restaurant.id){
+        <app-restaurant-card [restaurant]="restaurant">
+        </app-restaurant-card>
+        }
+    </div>
+</div>

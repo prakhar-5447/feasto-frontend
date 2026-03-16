@@ -1,0 +1,12 @@
+<div class="categories">
+    <h2>What's on your mind?</h2>
+    <div class="category-grid">
+        @for(category of categories; track category.id){
+        <button (click)="selectCategory(category.id)" class="category-card"
+            [class.active]="selectedCategory===category.id">
+            <span class="icon">{{category.icon}}</span>
+            <span class="name">{{category.name}}</span>
+        </button>
+        }
+    </div>
+</div>
