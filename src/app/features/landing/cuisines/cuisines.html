@@ -8,7 +8,7 @@
       @for( cuisine of cuisines;track $index){
       <div class="cuisine-card">
         <div class="image-wrapper">
-          <img [src]="cuisine.image" [alt]="cuisine.name" />
+          <img loading="lazy" [src]="cuisine.image" [alt]="cuisine.name" />
           <div class="overlay">
             <h4>{{ cuisine.name }}</h4>
             <p>{{ cuisine.restaurants }}</p>

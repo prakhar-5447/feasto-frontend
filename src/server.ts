@@ -5,6 +5,7 @@ import {
   writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
+import cookieParser from 'cookie-parser'
 import { join } from 'node:path';
 import dotenv from 'dotenv';
 const browserDistFolder = join(import.meta.dirname, '../browser');
@@ -12,6 +13,7 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 dotenv.config();
+app.use(cookieParser())
 
 app.get('/api/location-search', async (req, res) => {
   const query = req.query['q'];
@@ -69,6 +71,16 @@ app.use(
     redirect: false,
   }),
 );
+
+
+app.use((req, res, next) => {
+  const city = req.cookies?.city
+
+  if (req.url === '/' && city) {
+    return res.redirect(`/india/${city}`)
+  }
+  next()
+})
 
 /**
  * Handle all other requests by rendering the Angular application.

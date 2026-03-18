@@ -1,13 +1,38 @@
 import { Component } from '@angular/core';
 import { Navbar } from "../../shared/components/navbar/navbar";
-import { RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { Footer } from "../../shared/components/footer/footer";
+import { Auth } from '../../features/auth/auth';
+import { Modal } from '../../shared/components/modal/modal';
+import { LocationServicePersistence } from '../../core/services/location.service';
 
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
-  imports: [Navbar, RouterOutlet, Footer],
+  imports: [Navbar, RouterOutlet, Footer, Auth, Modal],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.sass',
 })
-export class DashboardLayout { }
+export class DashboardLayout {
+
+  constructor(private route: ActivatedRoute, private locationService: LocationServicePersistence) { }
+
+  ngOnInit() {
+    this.route.firstChild?.paramMap.subscribe(params => {
+      const city = params.get('city')
+      if (city) {
+        this.locationService.setCity(city)
+      }
+    })
+  }
+
+  showAuthModal = false;
+
+  openAuth() {
+    this.showAuthModal = true;
+  }
+
+  closeAuth() {
+    this.showAuthModal = false;
+  }
+}

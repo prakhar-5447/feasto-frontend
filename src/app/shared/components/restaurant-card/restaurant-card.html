@@ -1,6 +1,6 @@
 <a class="restaurant-card" [routerLink]="'/restaurant/' + restaurant.id">
     <div class="image">
-        <img [src]="restaurant.image" [alt]="restaurant.name" />
+        <img loading="lazy" [src]="restaurant.image" [alt]="restaurant.name" />
         @if(restaurant.offer){
         <div class="offer">
             {{restaurant.offer}}

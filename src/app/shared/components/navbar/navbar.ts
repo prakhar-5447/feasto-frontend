@@ -5,12 +5,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { LocationService } from '../../../core/services/location.service';
+import { LocationService, LocationServicePersistence } from '../../../core/services/location.service';
+import { ClickOutsideDirective } from "../../directive/clickOutside.directive";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [FontAwesomeModule, FormsModule],
+  imports: [FontAwesomeModule, FormsModule, ClickOutsideDirective],
   templateUrl: './navbar.html',
   styleUrl: './navbar.sass',
 })
@@ -20,7 +22,7 @@ export class Navbar {
   faLocationCrosshairs = faLocationCrosshairs;
   faMagnifyingGlass = faMagnifyingGlass;
 
-  selectedLocation = 'Select Location';
+  selectedLocation: string = 'Select Location';
   locationQuery = '';
   locationResults: any[] = [];
   showLocationDropdown = false;
@@ -28,8 +30,25 @@ export class Navbar {
 
   restaurantQuery = '';
   restaurantResults: any[] = [];
+  constructor(private http: HttpClient, private router: Router, private locationService: LocationService, private locationServicePersistence: LocationServicePersistence) {
+  }
 
-  constructor(private http: HttpClient, private locationService: LocationService) { }
+  ngOnInit() {
+    this.locationServicePersistence.city$.subscribe(city => {
+      this.selectedLocation = this.toTitleCase(city);
+    })
+  }
+
+  toTitleCase(value: string | null): string {
+    if (!value) return ""
+    return value.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+  }
+
+  closeDropdown() {
+    this.showLocationDropdown = false;
+    this.showRestaurantDropdown = false;
+    this.restaurantQuery = ''
+  }
 
   toggleLocationDropdown() {
     this.showRestaurantDropdown = false;
@@ -55,7 +74,10 @@ export class Navbar {
   }
 
   selectLocation(item: any) {
-    this.selectedLocation = item.place_name;
+    this.locationServicePersistence.setCity(item.text)
+    this.router.navigate(['india', item.text.toLowerCase()], {
+      replaceUrl: true
+    })
     this.locationResults = [];
     this.showLocationDropdown = false;
     this.locationQuery = '';

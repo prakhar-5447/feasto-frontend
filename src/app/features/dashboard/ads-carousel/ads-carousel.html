@@ -4,7 +4,7 @@
             @for(ad of ads; track ad.id){
             <div class="carousel-slide">
                 <div class="ad-card">
-                    <img [src]="ad.image" [alt]="ad.title">
+                    <img loading="lazy" [src]="ad.image" [alt]="ad.title">
                     <div class="overlay">
                         <h3>{{ad.title}}</h3>
                         <p>{{ad.subtitle}}</p>

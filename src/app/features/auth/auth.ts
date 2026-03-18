@@ -37,11 +37,8 @@ export class Auth {
   }
 
   sendOTP() {
-
     if (this.phoneNumber.length !== 10) return;
-
     this.loading = true;
-
     setTimeout(() => {
       this.loading = false;
       this.step = 'otp';
@@ -53,35 +50,25 @@ export class Auth {
   }
 
   verifyOTP() {
-
     if (this.otp.length !== 6) return;
-
     this.loading = true;
-
     setTimeout(() => {
-
       this.loading = false;
-
       // simulate API response
       const existingUser = Math.random() > 0.5;
-
       if (existingUser) {
         this.loginSuccess();
       } else {
         this.step = 'details';
       }
-
     }, 1000);
   }
 
   onOtpChange(any: any) { }
   resendOtp() { }
   completeSignup() {
-
     if (!this.name) return;
-
     this.loading = true;
-
     setTimeout(() => {
       this.loginSuccess();
     }, 1000);
@@ -97,27 +84,20 @@ export class Auth {
   }
 
   onOtpInput(event: Event, index: number) {
-
     const input = event.target as HTMLInputElement;
     const value = input.value.replace(/\D/g, '');
-
     if (!value) return;
-
     this.otpValues[index] = value;
-
     const next = this.otpInputs.get(index + 1);
     if (next) next.nativeElement.focus();
   }
 
   onOtpKeydown(event: KeyboardEvent, index: number) {
-
     if (event.key === 'Backspace') {
-
       if (!this.otpValues[index]) {
         const prev = this.otpInputs.get(index - 1);
         if (prev) prev.nativeElement.focus();
       }
-
       this.otpValues[index] = '';
     }
   }

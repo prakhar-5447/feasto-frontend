@@ -1,0 +1,33 @@
+<section class="cities">
+    <div class="title">
+        <fa-icon [icon]="faLineChart"></fa-icon>
+        Popular Cities
+    </div>
+    <div class="grid">
+        @for(city of popularCities; track city.id){
+        <div class="city-card" (click)="handleCityClick(city.name.toLowerCase())">
+            <img loading="lazy" loading="lazy" [src]="city.image" />
+            <div class="overlay">
+                <h3>{{city.name}}</h3>
+                <p>{{city.subtitle}}</p>
+            </div>
+        </div>
+        }
+    </div>
+</section>
+<section class="cities">
+    <div class="title">
+        All Cities
+    </div>
+    <div class="grid">
+        @for(city of allCities; track city){
+        <div class="city-list-item" (click)="handleCityClick(city.toLowerCase())">
+            <div class="left">
+                <fa-icon [icon]="faLocationDot"></fa-icon>
+                {{city}}
+            </div>
+            <fa-icon [icon]="faArrowRight"></fa-icon>
+        </div>
+        }
+    </div>
+</section>

@@ -14,7 +14,8 @@
             Enter the OTP sent to your mobile
         </p>
         }
-    </div> @if(step === 'phone'){
+    </div>
+    @if(step === 'phone'){
     <form (ngSubmit)="sendOTP()" class="form">
         <label>Mobile Number</label>
         <div class="phone-input">
@@ -69,4 +70,7 @@
         </p>
     </form>
     }
+    <p class="terms">
+        By continuing you agree to our Terms & Privacy Policy
+    </p>
 </div>

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="left">
       <h1 class="logo">Feasto</h1>
-      <div class="search">
+      <div class="search" appClickOutside (appClickOutside)="closeDropdown()">
         <div class="box">
           <div class="display" (click)="toggleLocationDropdown()">
             <fa-icon [icon]="faLocationDot"></fa-icon>
