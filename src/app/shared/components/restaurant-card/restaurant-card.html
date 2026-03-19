@@ -1,8 +1,10 @@
 <a class="restaurant-card" [routerLink]="'/restaurant/' + restaurant.id">
     <div class="image">
+        <div class="gradient"></div>
         <img loading="lazy" [src]="restaurant.image" [alt]="restaurant.name" />
         @if(restaurant.offer){
         <div class="offer">
+            <fa-icon [icon]="faTag"></fa-icon>
             {{restaurant.offer}}
         </div>
         }
@@ -12,10 +14,20 @@
         <p>{{restaurant.cuisine}}</p>
         <div class="meta">
             <span class="rating">
-                ⭐ {{restaurant.rating}}
+                <fa-icon [icon]="faStar"></fa-icon>
+                {{restaurant.rating}}
+            </span>
+            <span class="time">
+                <fa-icon [icon]="faClock"></fa-icon>
+                {{restaurant.time}}
+            </span>
+        </div>
+        <div class="meta-bottom">
+            <span>
+                &#x20B9;{{restaurant.priceForTwo}} for Two
             </span>
             <span>
-                ⏱ {{restaurant.time}}
+                {{restaurant.distance}}
             </span>
         </div>
     </div>

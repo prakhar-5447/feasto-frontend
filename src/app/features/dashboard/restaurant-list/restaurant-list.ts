@@ -27,7 +27,7 @@ export class RestaurantList {
       id: 2,
       name: 'Dominos Pizza',
       cuisine: 'Pizza, Italian',
-      image: 'https://images.unsplash.com/photo-1548365328-8b849e7a5f9c?w=1200&h=400&fit=crop&q=80',
+      image: 'https://images.unsplash.com/photo-1598023696416-0193a0bcd302?w=1200&h=400&fit=crop&q=80',
       rating: 4.2,
       time: '30 mins',
       priceForTwo: 500,
