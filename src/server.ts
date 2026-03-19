@@ -6,7 +6,7 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import cookieParser from 'cookie-parser'
-import { join } from 'node:path';
+import { isAbsolute, join } from 'node:path';
 import dotenv from 'dotenv';
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -72,20 +72,17 @@ app.use(
   }),
 );
 
-
-app.use((req, res, next) => {
-  const city = req.cookies?.city
-
-  if (req.url === '/' && city) {
-    return res.redirect(`/india/${city}`)
-  }
-  next()
-})
-
 /**
  * Handle all other requests by rendering the Angular application.
  */
 app.use((req, res, next) => {
+  // const city = req.cookies?.city
+  // const isRoot = req.path === '/'
+  // const isIndiaBsae = req.path === '/india'
+
+  // if ((isRoot || isIndiaBsae) && city) {
+  //   return res.redirect(`/india/${city}`)
+  // }
   angularApp
     .handle(req)
     .then((response) =>

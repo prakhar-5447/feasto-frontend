@@ -4,6 +4,7 @@ import { DashboardLayout } from './layouts/dashboard-layout/dashboard-layout';
 import { Dashboard } from './features/dashboard/dashboard';
 import { authGuard } from './core/guards/auth.guard';
 import { Location } from './features/location/location';
+import { Restaurant } from './features/restaurant/restaurant';
 
 export const routes: Routes = [
     {
@@ -21,8 +22,18 @@ export const routes: Routes = [
             },
             {
                 path: ':city',
-                loadComponent: () => Dashboard
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () => Dashboard
+                    },
+                    {
+                        path: ':restaurant',
+                        loadComponent: () => Restaurant
+                    },
+                ]
             },
+
         ]
     },
     {

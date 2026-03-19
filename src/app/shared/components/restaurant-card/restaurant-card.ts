@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faTag, faStar
@@ -11,7 +10,7 @@ import {
 @Component({
   selector: 'app-restaurant-card',
   standalone: true,
-  imports: [RouterLink, FontAwesomeModule],
+  imports: [FontAwesomeModule],
   templateUrl: './restaurant-card.html',
   styleUrl: './restaurant-card.sass',
 })

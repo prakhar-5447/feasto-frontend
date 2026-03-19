@@ -1,15 +1,33 @@
 import { Component, Input } from '@angular/core';
 import { RestaurantCard } from '../../../shared/components/restaurant-card/restaurant-card';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-restaurant-list',
   standalone: true,
-  imports: [RestaurantCard],
+  imports: [RestaurantCard, RouterLink],
   templateUrl: './restaurant-list.html',
   styleUrl: './restaurant-list.sass',
 })
 export class RestaurantList {
   @Input() selectedCategory: string | null = null;
+  currentCity = ''
+  constructor(private router: ActivatedRoute) {
+  }
+
+  ngOnInit() {
+    this.router.paramMap.subscribe(params => {
+      this.currentCity = params.get('city') || ""
+    })
+  }
+
+  formatSlug(name: string) {
+    return name.
+      toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+  }
+
   restaurants = [
     {
       id: 1,
