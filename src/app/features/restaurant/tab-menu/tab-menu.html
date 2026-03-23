@@ -1,0 +1,103 @@
+<!-- <div class="menu">
+    @if(restaurantService.menu?.categories.length){
+    <div class="sidebar">
+        <div class="sidebar-box">
+            <h3>Categories</h3>
+
+            <nav>
+                @for(category of restaurantService.menu?.categories;track $index){
+                <button (click)="scrollToCategory($index)" [class.active]="activeCategory === $index">
+                    <span class="name">{{ category.name }}</span>
+                    <span class="count">{{ category.items.length }} items</span>
+                </button>
+                }
+
+            </nav>
+        </div>
+    </div>
+    }
+    <div class="category-container" #menuContainer>
+        @for(category of restaurantService.menu?.categories;track $index){
+        <div #categorySection [attr.data-category-index]="$index" class="category-section">
+            <h2>{{ category.name }}</h2>
+            @for(item of category.items;track item.id){
+            <div class="item">
+                <div class="left">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.description }}</p>
+                    <span>₹{{ item.price }}</span>
+                </div>
+
+                <div class="right">
+                    <img [src]="item.image" />
+
+                    <div class="controls">
+                        @if(getItemQuantity(item.id) > 0){
+                        <button (click)="updateQuantity(item.id, getItemQuantity(item.id), false)">-</button>
+                        <span>{{ getItemQuantity(item.id) }}</span>
+                        <button (click)="updateQuantity(item.id, getItemQuantity(item.id), true)">+</button>
+                        }
+
+                        @if(getItemQuantity(item.id) <= 0){ <button (click)="addToCart(item)">ADD</button>
+                            }
+
+                    </div>
+                </div>
+            </div>
+            }
+
+        </div>
+        }
+    </div>
+</div> -->
+
+
+<div class="menu-wrapper">
+    <div class="sidebar">
+        <div class="sidebar-box">
+            <h3>Categories</h3>
+            @for (category of restaurantService.menu?.categories; track $index){
+            <button (click)="scrollToCategory($index)" [class.active]="activeCategory === $index">
+                <span class="name">{{ category.name }}</span>
+                <span class="count"> ({{ category.items.length }})</span>
+            </button>
+            }
+        </div>
+    </div>
+
+    <div class="content">
+        @for (category of restaurantService.menu?.categories;track $index) {
+        <div class="category-section" [attr.data-index]="$index" #categorySection>
+            <h2>{{ category.name }}</h2>
+
+            @for(item of category.items;track item.id){
+            <div class="item">
+                <div class="left">
+                    <h3>{{ item.name }}</h3>
+                    <p>{{ item.description }}</p>
+                    <span>₹{{ item.price }}</span>
+                </div>
+
+                <div class="right">
+                    <img [src]="item.image" />
+
+                    <div class="controls">
+                        @if(getItemQuantity(item.id) > 0){
+                        <button (click)="updateQuantity(item.id, getItemQuantity(item.id), false)">-</button>
+                        <span>{{ getItemQuantity(item.id) }}</span>
+                        <button (click)="updateQuantity(item.id, getItemQuantity(item.id), true)">+</button>
+                        }
+
+                        @if(getItemQuantity(item.id) <= 0){ <button (click)="addToCart(item)">ADD</button>
+                            }
+
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
+
+    </div>
+
+</div>

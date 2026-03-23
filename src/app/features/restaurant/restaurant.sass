@@ -1,0 +1,132 @@
+@use '../../../styles/index' as *
+
+.page
+    min-height: 100vh
+    padding: 20px 0
+    max-width: 1200px
+    margin: 0 auto
+    .header
+        background: #fff
+        margin-bottom: 12px
+
+        a
+            display: inline-flex
+            align-items: center
+            gap: 8px
+            color: #666
+            text-decoration: none
+
+            &:hover
+                color: $color-text-primary
+                text-decoration: underline
+.details
+    position: sticky
+    top: 0
+    z-index: 30
+
+.tabs
+    background: #fff
+    border-bottom: 1px solid #e5e5e5
+    position: sticky
+    top: 300px
+    height: 50px
+    z-index: 25
+
+    .tab-links
+        display: flex
+
+    button
+        padding: 1rem 1.5rem
+        border: none
+        background: transparent
+        cursor: pointer
+        font-size: 16px
+        color: #666
+        border-bottom: 2px solid transparent
+        transition: 0.2s
+
+        &:hover
+            color: #000
+
+        &.active
+            color: #ea580c
+            border-bottom: 2px solid #ea580c
+
+// .content
+//     padding: 1.5rem
+
+// .reviews
+//     .review
+//         background: #fff
+//         padding: 1rem
+//         border-radius: 10px
+//         margin-bottom: 1rem
+//         box-shadow: 0 1px 3px rgba(0,0,0,0.08)
+
+//     h4
+//         font-weight: 600
+//         margin-bottom: 4px
+
+//     p
+//         color: #555
+//         margin-bottom: 6px
+
+//     span
+//         font-size: 14px
+//         color: #888
+
+// .cart
+//     .cart-item
+//         display: flex
+//         justify-content: space-between
+//         align-items: center
+//         background: #fff
+//         padding: 1rem
+//         border-radius: 10px
+//         margin-bottom: 1rem
+
+//     .actions
+//         display: flex
+//         align-items: center
+//         gap: 8px
+
+//         button
+//             width: 30px
+//             height: 30px
+//             border-radius: 50%
+//             border: 1px solid #ea580c
+//             background: transparent
+//             color: #ea580c
+//             cursor: pointer
+
+//     .total
+//         margin-top: 1rem
+//         font-size: 18px
+//         font-weight: 700
+//         text-align: right
+
+// .floating-cart
+//     position: fixed
+//     bottom: 0
+//     left: 0
+//     right: 0
+//     background: #fff
+//     border-top: 1px solid #ddd
+//     padding: 1rem
+//     box-shadow: 0 -2px 10px rgba(0,0,0,0.1)
+
+//     button
+//         width: 100%
+//         background: #ea580c
+//         color: #fff
+//         border: none
+//         padding: 1rem
+//         border-radius: 8px
+//         font-size: 16px
+//         font-weight: 600
+//         display: flex
+//         justify-content: space-between
+//         cursor: pointer
+
+//     &:hover
+//         background: #c2410c

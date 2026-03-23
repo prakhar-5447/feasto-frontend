@@ -1,0 +1,69 @@
+@use '../../../../styles/index' as *
+
+.info
+    display: flex
+    flex-direction: column
+    gap: 12px
+    padding: 20px 0
+    background: $color-white
+    border-bottom: 1px solid #e5e5e5
+    height: 300px
+    h1
+        font-size: 32px
+        font-weight: 700
+        color: $color-text-primary
+
+    p
+        color: $color-text-secondary
+
+    .rating-container
+        display: flex
+        align-items: center
+        gap: 8px
+        font-size: 16px
+        color: $color-text-secondary
+        .rating
+            gap: 4px
+            background: #16a34a
+            color: $color-white
+            padding: 6px 8px
+            border-radius: 4px
+
+    .meta
+        display: flex
+        flex-direction: column
+        gap: 12px
+        color: $color-text-secondary
+        font-weight: 500
+        font-size: 16px
+        .address
+            display: flex
+            gap: 8px
+        .time
+            display: flex
+            gap: 8px
+            .container
+                display: flex
+                gap: 18px
+                .status
+                    display: flex
+                    gap: 8px
+                    .open
+                        color: #1fcc5e
+                        font-weight: 600
+                    .close
+                        color: #d62121
+                        font-weight: 600
+        .price
+            font-size: 14px
+        .offer
+            display: flex
+            align-items: center
+            gap: 8px
+            border: 2px solid #ffa58f
+            background: #ffe8cc97
+            padding: 14px 8px
+            border-radius: 12px
+            font-size: 16px
+            color: $color-primary
+            font-weight: 600

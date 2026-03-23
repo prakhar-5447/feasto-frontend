@@ -1,1 +1,50 @@
-<p>restaurant works!</p>
+<div class="page">
+    <div class="header">
+        <a [routerLink]="['/india',locationServicePersistence.getCity()]">
+            Back
+        </a>
+    </div>
+    <app-image-carousel></app-image-carousel>
+    <div class="details">
+        <app-restaurant-info></app-restaurant-info>
+    </div>
+    <!-- Tabs -->
+    <div class="tabs">
+        <button (click)="setTab('menu')" [class.active]="activeTab==='menu'">
+            Menu
+        </button>
+
+        <button (click)="setTab('reviews')" [class.active]="activeTab==='reviews'">
+            Reviews ({{ reviews.length }})
+        </button>
+
+        <button (click)="setTab('cart')" [class.active]="activeTab==='cart'">
+            Cart ({{ cartCount }})
+        </button>
+    </div>
+    <router-outlet></router-outlet>
+    <!-- <div *ngIf="activeTab === 'reviews'" class="reviews">
+        <div *ngFor="let r of reviews" class="review">
+            <h4>{{ r.userName }}</h4>
+            <p>{{ r.comment }}</p>
+            <span>⭐ {{ r.rating }}</span>
+        </div>
+    </div>
+
+    <div *ngIf="activeTab === 'cart'" class="cart">
+        <div *ngFor="let item of cartItems" class="cart-item">
+            <span>{{ item.name }}</span>
+            <span>₹{{ item.price }}</span>
+
+            <div>
+                <button (click)="updateQuantity(item.id, item.quantity, false)">-</button>
+                {{ item.quantity }}
+                <button (click)="updateQuantity(item.id, item.quantity, true)">+</button>
+            </div>
+        </div>
+
+        <div class="total">
+            Total: ₹{{ cartTotal }}
+        </div>
+    </div> -->
+</div>
