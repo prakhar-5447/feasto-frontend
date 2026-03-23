@@ -36,6 +36,10 @@ export const routes: Routes = [
                         children: [
                             {
                                 path: '',
+                                redirectTo: 'order', pathMatch: 'full'
+                            },
+                            {
+                                path: 'order',
                                 loadComponent: () => TabMenu
                             },
                             {
