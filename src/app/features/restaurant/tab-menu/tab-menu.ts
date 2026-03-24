@@ -1,16 +1,17 @@
 import { Component, ElementRef, QueryList, ViewChildren, HostListener } from '@angular/core';
 import { CartService } from '../../../core/services/cart.service';
 import { RestaurantService } from '../../../core/services/restaurent.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-tab-menu',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './tab-menu.html',
   styleUrl: './tab-menu.sass',
 })
 export class TabMenu {
   activeCategory = 0;
-  OFFSET = 350
+  OFFSET = 290 + 50
   observer!: IntersectionObserver
   @ViewChildren('categorySection') categorySections!: QueryList<ElementRef>;
 
@@ -46,9 +47,8 @@ export class TabMenu {
 
     window.scrollTo({
       top: y,
-      behavior: 'smooth'
+      behavior: 'auto'
     });
-    this.activeCategory = index;
   }
 
   getItemQuantity(itemId: string): number {
