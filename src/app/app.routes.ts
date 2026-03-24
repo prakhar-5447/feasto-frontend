@@ -17,6 +17,7 @@ export const routes: Routes = [
     },
     {
         path: 'india',
+        data: { breadcrumb: 'india' },
         loadComponent: () => DashboardLayout,
         children: [
             {
@@ -25,6 +26,7 @@ export const routes: Routes = [
             },
             {
                 path: ':city',
+                data: { breadcrumb: 'city' },
                 children: [
                     {
                         path: '',
@@ -33,6 +35,7 @@ export const routes: Routes = [
                     {
                         path: ':restaurant',
                         loadComponent: () => Restaurant,
+                        data: { breadcrumb: 'restaurant' },
                         children: [
                             {
                                 path: '',
@@ -40,15 +43,21 @@ export const routes: Routes = [
                             },
                             {
                                 path: 'order',
-                                loadComponent: () => TabMenu
+                                loadComponent: () => TabMenu,
+                                data: { breadcrumb: 'Order' },
+
                             },
                             {
                                 path: 'reviews',
-                                loadComponent: () => TabReviews
+                                loadComponent: () => TabReviews,
+                                data: { breadcrumb: 'Reviews' },
+
                             },
                             {
                                 path: 'cart',
-                                loadComponent: () => TabCart
+                                loadComponent: () => TabCart,
+                                data: { breadcrumb: 'Cart' },
+
                             },
                         ]
 

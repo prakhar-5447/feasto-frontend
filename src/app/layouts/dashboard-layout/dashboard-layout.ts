@@ -5,11 +5,12 @@ import { Footer } from "../../shared/components/footer/footer";
 import { Auth } from '../../features/auth/auth';
 import { Modal } from '../../shared/components/modal/modal';
 import { LocationServicePersistence } from '../../core/services/location.service';
+import { Breadcrumb } from '../../shared/components/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
-  imports: [Navbar, RouterOutlet, Footer, Auth, Modal],
+  imports: [Navbar, RouterOutlet, Footer, Auth, Modal, Breadcrumb],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.sass',
 })
