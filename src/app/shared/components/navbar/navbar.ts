@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Inject, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faLocationDot, faLocationCrosshairs, faMagnifyingGlass
@@ -8,15 +8,25 @@ import { HttpClient } from '@angular/common/http';
 import { LocationService, LocationServicePersistence } from '../../../core/services/location.service';
 import { ClickOutsideDirective } from "../../directive/clickOutside.directive";
 import { Router } from '@angular/router';
+import { selectUser } from '../../../store/auth/auth.selectors';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../store/app.state'; // ✅ add this
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [FontAwesomeModule, FormsModule, ClickOutsideDirective],
+  imports: [FontAwesomeModule, FormsModule, ClickOutsideDirective, CommonModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.sass',
 })
 export class Navbar {
+  private store = inject(Store<AppState>);
+
+  user$: Observable<any> = this.store.select(selectUser);
+  constructor(private http: HttpClient, private router: Router, private locationService: LocationService, private locationServicePersistence: LocationServicePersistence) { }
+
   @Output() openAuth = new EventEmitter<void>();
   faLocationDot = faLocationDot;
   faLocationCrosshairs = faLocationCrosshairs;
@@ -30,8 +40,6 @@ export class Navbar {
 
   restaurantQuery = '';
   restaurantResults: any[] = [];
-  constructor(private http: HttpClient, private router: Router, private locationService: LocationService, private locationServicePersistence: LocationServicePersistence) {
-  }
 
   ngOnInit() {
     this.locationServicePersistence.city$.subscribe(city => {

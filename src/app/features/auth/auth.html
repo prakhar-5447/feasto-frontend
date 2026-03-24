@@ -4,33 +4,33 @@
             <fa-icon [icon]="faMobileScreen"></fa-icon>
         </div>
         <h1 class="title">Welcome to Feasto</h1>
-        @if(step === 'phone'){
+        @if(step() === 'phone'){
         <p class="subtitle">
             Enter your mobile number to continue
         </p>
         }
-        @if(step === 'otp'){
+        @if(step() === 'otp'){
         <p class="subtitle">
             Enter the OTP sent to your mobile
         </p>
         }
     </div>
-    @if(step === 'phone'){
-    <form (ngSubmit)="sendOTP()" class="form">
+    @if(step() === 'phone'){
+    <form (ngSubmit)="continueWithPhone(); $event.preventDefault()" class="form">
         <label>Mobile Number</label>
         <div class="phone-input">
             <div class="country-code">
                 +91
             </div>
-            <input type="tel" placeholder="Enter 10-digit mobile number" [value]="phoneNumber"
-                (input)="onPhoneChange($any($event.target).value)" />
+            <input type="tel" placeholder="Enter 10-digit mobile number" [value]="phoneNumber" maxlength="10"
+                inputmode="numeric" (input)="onPhoneChange($any($event.target).value)" />
         </div>
-        <button type="submit" [disabled]="loading || phoneNumber.length !== 10">
-            {{ loading ? 'Sending OTP...' : 'Send OTP' }}
+        <button type="submit" [disabled]="loading || !isPhoneValid">
+            {{ loading ? 'Processing...' : 'Continue' }}
         </button>
     </form>
     }
-    @if(step === 'otp'){
+    <!-- @if(step === 'otp'){
     <form (ngSubmit)="verifyOTP()" class="form">
         <label>Enter OTP</label>
         <p class="otp-info">
@@ -55,8 +55,8 @@
             </button>
         </p>
     </form>
-    }
-    @if(step === 'details'){
+    } -->
+    @if(step() === 'details'){
     <form (ngSubmit)="completeSignup()" class="form">
         <label>Your Name</label>
         <input type="text" [(ngModel)]="name" name="name" placeholder="Enter your name" />
