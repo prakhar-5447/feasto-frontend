@@ -60,10 +60,19 @@ app.use(
   }),
 );
 
-
 // ================== SSR ==================
 
+/**
+ * Handle all other requests by rendering the Angular application.
+ */
 app.use((req, res, next) => {
+  const city = req.cookies?.city
+  const isRoot = req.path === '/'
+  const isIndiaBsae = req.path === '/india'
+
+  if ((isRoot || isIndiaBsae) && city) {
+    return res.redirect(`/india/${city}`)
+  }
   angularApp
     .handle(req)
     .then((response) =>

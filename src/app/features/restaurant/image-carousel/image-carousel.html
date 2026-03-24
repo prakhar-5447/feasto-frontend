@@ -1,0 +1,14 @@
+<div class="carousel-wrapper">
+    <div class="container" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+        @for(img of restaurantService.restaurant?.images;track $index){
+        <div class="carousel-slide">
+            <div class="card">
+                <img loading="lazy" [src]="img" [alt]="img">
+            </div>
+        </div>
+        }
+    </div>
+
+    <button class="nav prev" (click)="prev()"><fa-icon [icon]="faArrowLeft"></fa-icon></button>
+    <button class="nav next" (click)="next()"><fa-icon [icon]="faArrowRight"></fa-icon></button>
+</div>

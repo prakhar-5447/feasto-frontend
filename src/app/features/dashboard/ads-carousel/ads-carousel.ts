@@ -3,6 +3,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faArrowLeft, faArrowRight
 } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-ads-carousel',
   standalone: true,
