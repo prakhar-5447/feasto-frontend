@@ -1,10 +1,14 @@
-import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, ElementRef, QueryList, ViewChildren, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faMobileScreen
 } from '@fortawesome/free-solid-svg-icons';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../../store/auth/auth.actions';
+import { AppState } from '../../store/app.state';
 
 type AuthStep = 'phone' | 'otp' | 'details';
 
@@ -16,7 +20,7 @@ type AuthStep = 'phone' | 'otp' | 'details';
   styleUrl: './auth.sass',
 })
 export class Auth {
-  step: AuthStep = 'phone';
+  step = signal<'phone' | 'details' | 'otp'>('phone');
   faMobileScreen = faMobileScreen;
 
   phoneNumber = '';
@@ -29,8 +33,11 @@ export class Auth {
   otpValues = ['', '', '', '', '', ''];
 
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
+  private store = inject(Store<AppState>);
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient,
+
+  ) { }
 
   get otp(): string {
     return this.otpValues.join('');
@@ -41,8 +48,7 @@ export class Auth {
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
-      this.step = 'otp';
-
+      this.step.set('otp');
       setTimeout(() => {
         this.otpInputs.first.nativeElement.focus();
       });
@@ -59,28 +65,79 @@ export class Auth {
       if (existingUser) {
         this.loginSuccess();
       } else {
-        this.step = 'details';
+        this.step.set('details');
       }
     }, 1000);
   }
 
   onOtpChange(any: any) { }
   resendOtp() { }
-  completeSignup() {
-    if (!this.name) return;
-    this.loading = true;
-    setTimeout(() => {
-      this.loginSuccess();
-    }, 1000);
-  }
 
   loginSuccess() {
     alert('Login success');
     this.router.navigate(['/app']);
   }
 
+  completeSignup() {
+
+    if (!this.name || this.name.length < 2) {
+      alert('Enter valid name');
+      return;
+    }
+
+    if (this.email && !this.email.includes('@')) {
+      alert('Enter valid email');
+      return;
+    }
+
+    this.http.post('/api/v1/auth/complete-profile', {
+      phone: this.phoneNumber,
+      name: this.name,
+      email: this.email || undefined
+    }, { withCredentials: true })
+      .subscribe(() => {
+        this.store.dispatch(AuthActions.loadUser());
+      });
+  }
+
+  continueWithPhone() {
+    if (!this.isPhoneValid || this.loading) return;
+
+    this.loading = true;
+
+    this.http.post('/api/v1/auth/phone-auth', {
+      phone: this.phoneNumber
+    }, { withCredentials: true })
+      .subscribe((res: any) => {
+
+        this.loading = false;
+
+        if (res.isNewUser) {
+          this.store.dispatch(AuthActions.loadUser());
+          Promise.resolve().then(() => {
+            this.step.set('details');
+          });
+        } else {
+          this.router.navigate(['/india']);
+        }
+
+      });
+  }
+
   onPhoneChange(value: string) {
-    this.phoneNumber = value.replace(/\D/g, '').slice(0, 10);
+    // Remove non-numbers
+    let cleaned = value.replace(/\D/g, '');
+
+    // Limit to 10 digits
+    if (cleaned.length > 10) {
+      cleaned = cleaned.slice(0, 10);
+    }
+
+    this.phoneNumber = cleaned;
+  }
+
+  get isPhoneValid(): boolean {
+    return this.phoneNumber.length === 10;
   }
 
   onOtpInput(event: Event, index: number) {

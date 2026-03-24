@@ -57,9 +57,17 @@
       <button class="btn">
         <span>Support</span>
       </button>
+      @let user = (user$ | async);
+
+      @if(user){
+      <div class="user-section">
+        <span>Hi, {{ user.name || user.phone}}</span>
+      </div>
+      } @else {
       <button class="btn auth" (click)="openAuth.emit()">
         <span>Log in</span>
       </button>
+      }
     </nav>
   </div>
 </header>
