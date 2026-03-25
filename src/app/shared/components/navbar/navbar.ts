@@ -13,6 +13,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/app.state'; // ✅ add this
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
+import * as AuthActions from '../../../store/auth/auth.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -25,7 +27,8 @@ export class Navbar {
   private store = inject(Store<AppState>);
 
   user$: Observable<any> = this.store.select(selectUser);
-  constructor(private http: HttpClient, private router: Router, private locationService: LocationService, private locationServicePersistence: LocationServicePersistence) { }
+  constructor(private http: HttpClient, private router: Router, private locationService: LocationService, private locationServicePersistence: LocationServicePersistence, private authService: AuthService,
+  ) { }
 
   @Output() openAuth = new EventEmitter<void>();
   faLocationDot = faLocationDot;
@@ -133,4 +136,20 @@ export class Navbar {
     this.restaurantResults = [];
     this.showRestaurantDropdown = false;
   }
+
+ logout() {
+  this.authService.logout().subscribe({
+    next: () => {
+
+      // 🔥 clear ngrx state
+      this.store.dispatch(AuthActions.logout());
+
+      // 🔥 reload AFTER cookie cleared
+      window.location.href = '/';
+    },
+    error: (err) => {
+      console.error(err);
+    }
+  });
+}
 }

@@ -42,3 +42,17 @@ exports.completeSignup = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.logout = (req, res) => {
+
+    res.clearCookie('token', {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/'
+    });
+
+    res.json({
+        success: true,
+        message: 'Logged out successfully'
+    });
+};

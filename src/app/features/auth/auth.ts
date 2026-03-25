@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, QueryList, ViewChildren, inject, signal } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren, inject, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -9,6 +9,8 @@ import {
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../../store/auth/auth.actions';
 import { AppState } from '../../store/app.state';
+import { Observable } from 'rxjs';
+import { selectUser } from '../../store/auth/auth.selectors';
 
 type AuthStep = 'phone' | 'otp' | 'details';
 
@@ -78,6 +80,8 @@ export class Auth {
     this.router.navigate(['/app']);
   }
 
+  user$: Observable<any> = this.store.select(selectUser);
+
   completeSignup() {
 
     if (!this.name || this.name.length < 2) {
@@ -97,6 +101,9 @@ export class Auth {
     }, { withCredentials: true })
       .subscribe(() => {
         this.store.dispatch(AuthActions.loadUser());
+        Promise.resolve().then(() => {
+          this.router.navigate(['/']);
+        });
       });
   }
 
@@ -113,14 +120,13 @@ export class Auth {
         this.loading = false;
 
         if (res.isNewUser) {
+          this.step.set('details');
+        } else {
           this.store.dispatch(AuthActions.loadUser());
           Promise.resolve().then(() => {
-            this.step.set('details');
+            this.router.navigate(['/']);
           });
-        } else {
-          this.router.navigate(['/india']);
         }
-
       });
   }
 
