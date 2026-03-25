@@ -20,7 +20,7 @@ export class AuthEffects {
                         AuthActions.loadUserSuccess({ user: res.data })
                     ),
                     catchError(() =>
-                        of(AuthActions.loadUserFailure({ error: 'Not logged in' }))
+                        of(AuthActions.logout())
                     )
                 )
             )

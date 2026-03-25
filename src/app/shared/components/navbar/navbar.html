@@ -63,6 +63,9 @@
       <div class="user-section">
         <span>Hi, {{ user.name || user.phone}}</span>
       </div>
+      <button class="btn auth" (click)="logout()">
+        <span>Log out</span>
+      </button>
       } @else {
       <button class="btn auth" (click)="openAuth.emit()">
         <span>Log in</span>

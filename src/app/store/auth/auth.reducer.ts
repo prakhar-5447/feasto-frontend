@@ -24,5 +24,9 @@ export const authReducer = createReducer(
         error
     })),
 
-    on(AuthActions.logout, () => initialState)
+    on(AuthActions.logout, (state) => ({
+        ...state,
+        loading: false,
+        user: null
+    }))
 );
