@@ -22,14 +22,18 @@
 
                     <div class="controls">
                         @if(getItemQuantity(item.id) > 0){
-                        <button (click)="updateQuantity(item.id, getItemQuantity(item.id), false)">-</button>
-                        <span>{{ getItemQuantity(item.id) }}</span>
-                        <button (click)="updateQuantity(item.id, getItemQuantity(item.id), true)">+</button>
+                        <div class="qty-box">
+                            <button (click)="updateQuantity(item.id, getItemQuantity(item.id), false)"
+                                class="btn"><fa-icon [icon]="faMinus"></fa-icon></button>
+                            <span>{{ getItemQuantity(item.id) }}</span>
+                            <button (click)="updateQuantity(item.id, getItemQuantity(item.id), true)"
+                                class="btn"><fa-icon [icon]="faPlus"></fa-icon></button>
+                        </div>
                         }
 
-                        @if(getItemQuantity(item.id) <= 0){ <button (click)="addToCart(item)">ADD</button>
+                        @if(getItemQuantity(item.id) <= 0){ <button (click)="addToCart(item)" class="add-btn">
+                            ADD</button>
                             }
-
                     </div>
                 </div>
                 <div class="right">

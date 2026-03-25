@@ -40,8 +40,9 @@
             margin-bottom: 20px
 
             h2
-                font-size: 18px
-                margin-bottom: 16px
+                font-size: 16px
+                font-weight: 500
+                margin-bottom: 12px
 
             .item
                 display: flex
@@ -104,34 +105,38 @@
 
                     .controls
                         position: absolute
-                        bottom: 8px
+                        bottom: 12px
                         left: 50%
                         transform: translateX(-50%)
-
-                        .qty-box
-                            display: flex
-                            align-items: center
-                            gap: 8px
-                            background: #fff
-                            border-radius: 8px
-                            padding: 4px 8px
-                            box-shadow: 0 2px 6px rgba(0,0,0,0.2)
 
                         button
                             border: none
                             background: transparent
                             cursor: pointer
-                            color: #ea580c
-                            font-size: 16px
+                            color: $color-primary
+                            font-size: 14px
+                        .qty-box
+                            background: $color-white
+                            border: 1px solid $color-primary
+                            border-radius: 6px
+                            font-size: 14px
+                            display: flex
+                            align-items: center
+                            gap: 4px
+                            .btn
+                                width: 28px
+                                height: 28px
+                                border-radius: 6px
+                                font-size: 14px
+                            span
+                                font-size: 16px
 
                         .add-btn
-                            background: #fff
-                            border: 1px solid #ea580c
-                            color: #ea580c
                             padding: 4px 12px
+                            background: $color-white
+                            border: 1px solid $color-primary
                             border-radius: 6px
+                            color: $color-primary
                             cursor: pointer
                             font-weight: 600
-
-                        &:hover
-                            background: #fff7ed
+                            font-size: 16px

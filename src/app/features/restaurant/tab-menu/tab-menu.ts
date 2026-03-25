@@ -3,13 +3,19 @@ import { CartService } from '../../../core/services/cart.service';
 import { RestaurantService } from '../../../core/services/restaurent.service';
 import { NgClass } from '@angular/common';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  faPlus, faMinus
+} from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-tab-menu',
-  imports: [NgClass],
+  imports: [NgClass, FontAwesomeModule],
   templateUrl: './tab-menu.html',
   styleUrl: './tab-menu.sass',
 })
 export class TabMenu {
+  faMinus = faMinus
+  faPlus = faPlus
   activeCategory = 0;
   OFFSET = 290 + 50
   observer!: IntersectionObserver
@@ -57,11 +63,11 @@ export class TabMenu {
   }
 
   addToCart(item: any) {
-    // this.cartService.addToCart({
-    //   ...item,
-    //   restaurantId: this.id,
-    //   restaurantName: this.restaurant.name,
-    // });
+    this.cartService.addToCart({
+      ...item,
+      restaurantId: this.restaurantService.restaurant.id,
+      restaurantName: this.restaurantService.restaurant.name,
+    });
   }
 
   updateQuantity(itemId: string, qty: number, inc: boolean) {

@@ -1,24 +1,21 @@
 <div class="page">
-    <div class="header">
-        <a [routerLink]="['/india',locationServicePersistence.getCity()]">
-            Back
-        </a>
-    </div>
+    @if(showCarousel()){
     <app-image-carousel></app-image-carousel>
+    }
     <div class="details">
         <app-restaurant-info></app-restaurant-info>
     </div>
     <!-- Tabs -->
     <div class="tabs">
-        <button (click)="setTab('menu')" [class.active]="activeTab==='menu'">
-            Menu
+        <button routerLink="order" (click)="setTab('order')" [class.active]="activeTab==='order'">
+            Order
         </button>
 
-        <button (click)="setTab('reviews')" [class.active]="activeTab==='reviews'">
+        <button routerLink="reviews" (click)="setTab('reviews')" [class.active]="activeTab==='reviews'">
             Reviews ({{ reviews.length }})
         </button>
 
-        <button (click)="setTab('cart')" [class.active]="activeTab==='cart'">
+        <button routerLink="cart" (click)="setTab('cart')" [class.active]="activeTab==='cart'">
             Cart ({{ cartCount }})
         </button>
     </div>

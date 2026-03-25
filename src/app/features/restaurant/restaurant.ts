@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { CartService } from '../../core/services/cart.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -389,17 +389,22 @@ export class Restaurant {
   restaurant: any;
   menu: any;
   reviews: any[] = [];
-  activeTab: string = 'menu';
+  activeTab: string = 'order';
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     public cartService: CartService,
     public restaurantService: RestaurantService,
     public locationServicePersistence: LocationServicePersistence
   ) { }
 
+  showCarousel() {
+    return this.router.url.includes('/order')
+  }
 
   ngOnInit() {
+    this.activeTab = this.route.firstChild?.snapshot.routeConfig?.path || 'order'
     // this.id = this.route.snapshot.paramMap.get('id')!;
     this.id = '1';
     this.restaurant = this.restaurants.find((r) => r.id === this.id);
