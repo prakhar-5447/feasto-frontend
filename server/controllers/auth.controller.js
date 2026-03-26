@@ -27,16 +27,22 @@ exports.phoneAuth = async (req, res, next) => {
 
 exports.completeSignup = async (req, res, next) => {
     try {
-        const user = await authService.completeSignup(req.body);
+        const { user } = await authService.phoneAuth(req.body.phone);
 
-        const token = generateToken(user);
+        if (!user) {
+            const user = await authService.completeSignup(req.body);
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            sameSite: 'lax'
-        });
+            const token = generateToken(user);
 
-        res.json({ success: true, data: user });
+            res.cookie('token', token, {
+                httpOnly: true,
+                sameSite: 'lax'
+            });
+
+            res.json({ success: true, data: user });
+        } else {
+            res.json({ success: false });
+        }
 
     } catch (err) {
         next(err);

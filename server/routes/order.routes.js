@@ -1,32 +1,34 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
 
 const orderController = require("../controllers/order.controller");
 
-const auth = require("../middlewares/auth.middleware");
+const { protect } = require('../middlewares/auth.middleware');
+
 const role = require("../middlewares/role.middleware");
 
 router.post(
     "/place",
-    auth,
+    protect,
     orderController.placeOrder
 );
 
 router.get(
     "/my-orders",
-    auth,
+    protect,
     orderController.getUserOrders
 );
 
 router.get(
     "/restaurant/:restaurantId",
-    auth,
+    protect,
     role("restaurant"),
     orderController.getRestaurantOrders
 );
 
 router.put(
     "/:id/status",
-    auth,
+    protect,
     role("restaurant"),
     orderController.updateOrderStatus
 );

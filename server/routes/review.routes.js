@@ -1,8 +1,9 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
 
 const reviewController = require("../controllers/review.controller");
 
-const auth = require("../middlewares/auth.middleware");
+const { protect } = require('../middlewares/auth.middleware');
 
 const validate = require("../middlewares/validation.middleware");
 
@@ -11,7 +12,7 @@ const { reviewSchema } =
 
 router.post(
     "/:restaurantId",
-    auth,
+    protect,
     validate(reviewSchema),
     reviewController.createReview
 );
@@ -23,13 +24,13 @@ router.get(
 
 router.put(
     "/:id",
-    auth,
+    protect,
     reviewController.updateReview
 );
 
 router.delete(
     "/:id",
-    auth,
+    protect,
     reviewController.deleteReview
 );
 

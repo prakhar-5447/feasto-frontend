@@ -25,6 +25,8 @@ const connectDB = require('../server/config/db');
 connectDB();
 
 app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // 🔥 Mount backend API
 app.use('/api', backendApp);
@@ -49,7 +51,6 @@ app.get('/api/location-search', async (req, res) => {
   }
 });
 
-
 // ================== STATIC ==================
 
 app.use(
@@ -65,21 +66,35 @@ app.use(
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.use((req, res, next) => {
-  const city = req.cookies?.city
-  const isRoot = req.path === '/'
 
-  if (isRoot && city) {
-    return res.redirect(`/india/${city}`);
+
+app.use(async (req, res, next) => {
+
+  // 🚫 Skip SSR for API routes
+  if (req.path.startsWith('/api')) {
+    return next();
   }
-  angularApp
-    .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
-    .catch(next);
-});
 
+  try {
+    const city = req.cookies?.city;
+    const isRoot = req.path === '/';
+
+    if (isRoot && city) {
+      return res.redirect(`/india/${city}`);
+    }
+
+    const response = await angularApp.handle(req);
+
+    if (response) {
+      return writeResponseToNodeResponse(response, res);
+    }
+
+    next();
+
+  } catch (err) {
+    next(err);
+  }
+});
 
 // ================== SERVER START ==================
 

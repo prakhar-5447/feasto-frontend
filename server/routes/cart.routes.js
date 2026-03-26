@@ -1,8 +1,10 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
 
 const cartController = require("../controllers/cart.controller");
 
-const auth = require("../middlewares/auth.middleware");
+const { protect } = require('../middlewares/auth.middleware');
+
 const validate = require("../middlewares/validation.middleware");
 
 const {
@@ -11,7 +13,7 @@ const {
 
 router.post(
     "/add",
-    auth,
+    protect,
     validate(addToCartSchema),
     cartController.addToCart
 );

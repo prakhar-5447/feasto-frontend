@@ -9,6 +9,15 @@ const userSchema = new mongoose.Schema(
             maxlength: 50
         },
 
+        role: {
+            type: String,
+            enum: [
+                "customer",
+                "restaurant_partner"
+            ],
+            required: true,
+        },
+
         phone: {
             type: String,
             required: true,
@@ -51,4 +60,4 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.models.User || mongoose.model('User', userSchema);
