@@ -10,7 +10,7 @@ import { Breadcrumb } from '../../shared/components/breadcrumb/breadcrumb';
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
-  imports: [Navbar, RouterOutlet, Footer, Auth, Modal, Breadcrumb],
+  imports: [Navbar, RouterOutlet, Footer, Auth, Breadcrumb],
   templateUrl: './dashboard-layout.html',
   styleUrl: './dashboard-layout.sass',
 })
@@ -34,6 +34,7 @@ export class DashboardLayout {
   }
 
   closeAuth() {
+    console.log("dajwijowij")
     this.showAuthModal = false;
   }
 }

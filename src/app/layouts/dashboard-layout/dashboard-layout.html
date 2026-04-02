@@ -2,8 +2,6 @@
 <app-breadcrumb></app-breadcrumb>
 <router-outlet></router-outlet>
 @if(showAuthModal){
-<app-modal (close)="closeAuth()">
-    <app-auth></app-auth>
-</app-modal>
+    <app-auth (closeAuth)="closeAuth()"></app-auth>
 }
 <app-footer></app-footer>

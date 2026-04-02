@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, QueryList, ViewChildren, inject, model, signal } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, QueryList, ViewChildren, inject, model, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -11,35 +11,39 @@ import * as AuthActions from '../../store/auth/auth.actions';
 import { AppState } from '../../store/app.state';
 import { Observable } from 'rxjs';
 import { selectUser } from '../../store/auth/auth.selectors';
+import { NgClass } from '@angular/common';
 
 type AuthStep = 'phone' | 'otp' | 'details';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [FormsModule, FontAwesomeModule],
+  imports: [FormsModule, FontAwesomeModule, NgClass],
   templateUrl: './auth.html',
   styleUrl: './auth.sass',
 })
 export class Auth {
-  step = signal<'phone' | 'details' | 'otp'>('phone');
+  @Output() closeAuth = new EventEmitter<void>();
   faMobileScreen = faMobileScreen;
+  step = signal<'phone' | 'details' | 'otp'>('phone');
 
-  phoneNumber = '';
+  phoneNumber = '1234567***';
   name = '';
   email = '';
 
   loading = false;
 
   otpArray = [0, 1, 2, 3, 4, 5];
-  otpValues = ['', '', '', '', '', ''];
+  otpValues: string[] = ['', '', '', '', '', ''];
+
+  timer = signal(30);
+  resendDisabled = signal(true);
+  private intervalId: any;
 
   @ViewChildren('otpInput') otpInputs!: QueryList<ElementRef>;
   private store = inject(Store<AppState>);
 
-  constructor(private router: Router, private http: HttpClient,
-
-  ) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   get otp(): string {
     return this.otpValues.join('');
@@ -51,6 +55,8 @@ export class Auth {
     setTimeout(() => {
       this.loading = false;
       this.step.set('otp');
+      this.startResendTimer();
+
       setTimeout(() => {
         this.otpInputs.first.nativeElement.focus();
       });
@@ -72,8 +78,29 @@ export class Auth {
     }, 1000);
   }
 
-  onOtpChange(any: any) { }
-  resendOtp() { }
+  startResendTimer() {
+    this.resendDisabled.set(true);
+    this.timer.set(30);
+
+    this.intervalId = setInterval(() => {
+      const current = this.timer();
+
+      if (current > 0) {
+        this.timer.set(current - 1);
+      }
+
+      if (current <= 1) {
+        clearInterval(this.intervalId);
+        this.resendDisabled.set(false);
+      }
+    }, 1000);
+  }
+
+
+  resendOtp() {
+    if (this.resendDisabled()) return;
+    this.startResendTimer();
+  }
 
   loginSuccess() {
     alert('Login success');
@@ -102,7 +129,9 @@ export class Auth {
       .subscribe(() => {
         this.store.dispatch(AuthActions.loadUser());
         Promise.resolve().then(() => {
-          this.router.navigate(['/']);
+          // this.router.navigate(['/']);
+          console.log("qwweqw")
+          this.closeAuth.emit()
         });
       });
   }
@@ -121,10 +150,13 @@ export class Auth {
 
         if (res.isNewUser) {
           this.step.set('details');
+          this.startResendTimer();
         } else {
           this.store.dispatch(AuthActions.loadUser());
           Promise.resolve().then(() => {
-            this.router.navigate(['/']);
+            // this.router.navigate(['/']);
+            console.log("sdadas")
+            this.closeAuth.emit()
           });
         }
       });
@@ -161,7 +193,14 @@ export class Auth {
         const prev = this.otpInputs.get(index - 1);
         if (prev) prev.nativeElement.focus();
       }
-      this.otpValues[index] = '';
+      if (index - 1 >= 0)
+        this.otpValues[index - 1] = ''
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
   }
 }
