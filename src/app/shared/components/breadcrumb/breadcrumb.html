@@ -1,5 +1,5 @@
 <div class="breadcrumb">
-    @for(crumb of breadcrumbs;track $index){
+    @for(crumb of breadcrumbs;track crumb.url){
     @if($index < breadcrumbs.length -1 ){ <a [routerLink]="crumb.url">{{ crumb.label }}</a>
         }
         @if($index === breadcrumbs.length -1 ){ <span>{{ crumb.label }}</span>}

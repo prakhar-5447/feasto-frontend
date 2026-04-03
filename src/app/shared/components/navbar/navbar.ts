@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Inject, inject } from '@angular/core';
+import { Component, Output, EventEmitter, Inject, inject, signal } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faLocationDot, faLocationCrosshairs, faMagnifyingGlass
@@ -15,11 +15,12 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import * as AuthActions from '../../../store/auth/auth.actions';
+import { Loader } from '../loader/loader';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [FontAwesomeModule, FormsModule, ClickOutsideDirective, CommonModule],
+  imports: [FontAwesomeModule, FormsModule, ClickOutsideDirective, CommonModule, Loader],
   templateUrl: './navbar.html',
   styleUrl: './navbar.sass',
 })
@@ -27,7 +28,7 @@ export class Navbar {
   private store = inject(Store<AppState>);
 
   user$: Observable<any> = this.store.select(selectUser);
-  constructor(private http: HttpClient, private router: Router, private locationService: LocationService, private locationServicePersistence: LocationServicePersistence, private authService: AuthService,
+  constructor(private http: HttpClient, private router: Router, private locationService: LocationService, private locationServicePersistence: LocationServicePersistence, private authService: AuthService
   ) { }
 
   @Output() openAuth = new EventEmitter<void>();
@@ -35,7 +36,7 @@ export class Navbar {
   faLocationCrosshairs = faLocationCrosshairs;
   faMagnifyingGlass = faMagnifyingGlass;
 
-  selectedLocation: string = 'Select Location';
+  selectedLocation = signal('Select Location');
   locationQuery = '';
   locationResults: any[] = [];
   showLocationDropdown = false;
@@ -44,11 +45,12 @@ export class Navbar {
   restaurantQuery = '';
   restaurantResults: any[] = [];
 
-  ngOnInit() {
-    this.locationServicePersistence.city$.subscribe(city => {
-      this.selectedLocation = this.toTitleCase(city);
-    })
-  }
+  detectLocationLoader = signal<boolean>(false)
+  // ngOnInit() {
+  //   this.locationServicePersistence.city$.subscribe(city => {
+  //     this.selectedLocation.set(this.toTitleCase(city));
+  //   })
+  // }
 
   toTitleCase(value: string | null): string {
     if (!value) return ""
@@ -95,20 +97,29 @@ export class Navbar {
   }
 
   detectLocation() {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const { latitude, longitude } = position.coords;
-        this.locationService
-          .reverseGeocode(latitude, longitude)
-          .subscribe((data: any) => {
-            this.selectedLocation = data.place_name;
-          });
-      },
-      error => {
-        console.error(error);
-        alert('Location permission denied');
-      }
-    );
+    if (!this.detectLocationLoader()) {
+      this.detectLocationLoader.set(true)
+      navigator.geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+          this.locationService
+            .reverseGeocode(latitude, longitude)
+            .subscribe((data: any) => {
+              this.selectedLocation.set(data['context'][1]['text'])
+              this.detectLocationLoader.set(false)
+              this.locationServicePersistence.setCity(data['context'][2]['text'])
+              this.showLocationDropdown = false
+              this.router.navigate(['/india', data['context'][2]['text']]);
+            })
+        },
+        error => {
+          console.error(error);
+          this.detectLocationLoader.set(false)
+          alert('Location permission denied');
+          this.showLocationDropdown = false
+        }
+      );
+    }
   }
 
   searchRestaurant() {
@@ -137,19 +148,19 @@ export class Navbar {
     this.showRestaurantDropdown = false;
   }
 
- logout() {
-  this.authService.logout().subscribe({
-    next: () => {
+  logout() {
+    this.authService.logout().subscribe({
+      next: () => {
 
-      // 🔥 clear ngrx state
-      this.store.dispatch(AuthActions.logout());
+        // 🔥 clear ngrx state
+        this.store.dispatch(AuthActions.logout());
 
-      // 🔥 reload AFTER cookie cleared
-      window.location.href = '/';
-    },
-    error: (err) => {
-      console.error(err);
-    }
-  });
-}
+        // 🔥 reload AFTER cookie cleared
+        window.location.href = '/';
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
 }

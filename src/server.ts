@@ -51,6 +51,24 @@ app.get('/api/location-search', async (req, res) => {
   }
 });
 
+app.get('/api/location/reverse', async (req, res) => {
+  const lat = req.query['lat'];
+  const lng = req.query['lng'];
+  if (!lat || !lng) {
+    return res.status(400).json({ error: 'Latitude and Longitude required' });
+  }
+  try {
+    const response = await fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${process.env['MAPBOX_TOKEN']}`
+    );
+    const data = await response.json();
+    return res.json(data.features[0]);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Reverse geocoding failed' });
+  }
+});
+
 // ================== STATIC ==================
 
 app.use(

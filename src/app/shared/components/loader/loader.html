@@ -1,0 +1,10 @@
+@if(loading){
+<div class="loader-wrapper" [class.overlay]="overlay">
+    <div class="spinner" [style.borderwidth.px]="borderSize" [style.width.px]="size" [style.height.px]="size" [style.borderTopColor]="color"></div>
+    @if(text){
+    <p class="loader-text">
+        {{ text }}
+    </p>
+    }
+</div>
+}
