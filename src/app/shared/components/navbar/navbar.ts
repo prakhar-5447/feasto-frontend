@@ -46,11 +46,9 @@ export class Navbar {
   restaurantResults: any[] = [];
 
   detectLocationLoader = signal<boolean>(false)
-  // ngOnInit() {
-  //   this.locationServicePersistence.city$.subscribe(city => {
-  //     this.selectedLocation.set(this.toTitleCase(city));
-  //   })
-  // }
+  goToProfile(user: string) {
+    this.router.navigate(['/users', user])
+  }
 
   toTitleCase(value: string | null): string {
     if (!value) return ""
@@ -109,7 +107,7 @@ export class Navbar {
               this.detectLocationLoader.set(false)
               this.locationServicePersistence.setCity(data['context'][2]['text'])
               this.showLocationDropdown = false
-              this.router.navigate(['/india', data['context'][2]['text']]);
+              this.router.navigate(['/india', data['context'][2]['text'].toLowerCase()]);
             })
         },
         error => {

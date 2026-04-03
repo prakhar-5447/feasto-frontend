@@ -27,7 +27,7 @@ export class Auth {
   faMobileScreen = faMobileScreen;
   step = signal<'phone' | 'details' | 'otp'>('phone');
 
-  phoneNumber = '1234567***';
+  phoneNumber = '';
   name = '';
   email = '';
 

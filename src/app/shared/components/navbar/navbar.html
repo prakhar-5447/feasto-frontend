@@ -15,9 +15,9 @@
             <button class="gps-btn" (click)="detectLocation()">
               <div class="loader-area">
                 @if(detectLocationLoader()){
-                  <app-loader [size]="18"></app-loader>
+                <app-loader [size]="18"></app-loader>
                 }@else{
-                  <fa-icon loading="lazy" [icon]="faLocationCrosshairs"></fa-icon>
+                <fa-icon loading="lazy" [icon]="faLocationCrosshairs"></fa-icon>
                 }
               </div>
               <div class="gps-text">
@@ -60,19 +60,24 @@
     </div>
 
     <nav class="nav">
-      <button class="btn">
-        <span>Support</span>
-      </button>
       @let user = (user$ | async);
 
       @if(user){
-      <div class="user-section">
-        <span>Hi, {{ user.name || user.phone}}</span>
+      <div class="navbar-user" (click)="goToProfile(user.name)">
+        <div class="avatar">
+          {{ user.name.charAt(0) }}
+        </div>
+        <div class="info">
+          <span class="name">{{ user.name }}</span>
+        </div>
       </div>
-      <button class="btn auth" (click)="logout()">
+      <!-- <button class="btn auth" (click)="logout()">
         <span>Log out</span>
-      </button>
+      </button> -->
       } @else {
+      <button class="btn">
+        <span>Support</span>
+      </button>
       <button class="btn auth" (click)="openAuth.emit()">
         <span>Log in</span>
       </button>
