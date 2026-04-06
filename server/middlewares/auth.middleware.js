@@ -1,6 +1,6 @@
 const { verifyToken } = require('../utils/token.utils');
 
-exports.protect = (req, res, next) => {
+exports.    protect = (req, res, next) => {
     try {
         const token = req.cookies.token;
 

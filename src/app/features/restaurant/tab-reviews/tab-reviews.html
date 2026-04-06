@@ -1,1 +1,90 @@
-<p>tab-reviews works!</p>
+<div class="reviews-layout">
+    <div class="review-list">
+        @for(review of restaurantService!.reviews; track review.id){
+        <div class="review-card">
+            <div class="review-header">
+                <div class="review-user">
+                    <h4 class="user-name">
+                        {{ review.userName }}
+                    </h4>
+                    <div class="review-meta">
+                        <div class="stars">
+                            @for(star of stars; track $index){
+                            <fa-icon [icon]="faStar" class="star"
+                                [ngClass]="star <= review.rating ? 'filled' : 'empty'"></fa-icon>
+                            }
+                        </div>
+                        <span class="review-date">
+                            {{ review.date }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <p class="review-comment">
+                {{ review.comment }}
+            </p>
+            <button class="helpful-btn">
+                <fa-icon [icon]="faThumbsUp"></fa-icon>
+                <span>Helpful ({{ review.helpful }})</span>
+            </button>
+        </div>
+        }
+        <div class="pagination">
+            <button class="nav-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+                <fa-icon [icon]="faArrowLeft"></fa-icon>
+            </button>
+            @for(page of pages;track page){
+            <button class="page-btn" [class.active]="page === currentPage" (click)="changePage(page)">
+                {{ page }}
+            </button>
+            }
+            <button class="nav-btn" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+                <fa-icon [icon]="faArrowRight"></fa-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="review-form-container">
+        <div class="rating-summary">
+            <div class="rating-score">
+                <div class="rating-number">
+                    {{ restaurant.rating }}
+                </div>
+                <div class="stars">
+                    @for(star of stars; track $index){
+                    <fa-icon [icon]="faStar" class="star"
+                        [ngClass]="star <= roundRating ? 'filled' : 'empty'"></fa-icon>
+                    }
+                </div>
+                <div class="rating-count">
+                    {{ restaurant.reviewCount }} ratings
+                </div>
+            </div>
+            <div class="rating-info">
+                Based on recent reviews
+            </div>
+        </div>
+        <div class="ai-container">
+            <div class="btn">
+                <button>View AI Summary</button>
+            </div>
+        </div>
+        <form class="form-area" (ngSubmit)="addReview()">
+            <h2 class="form-title">Write a review</h2>
+            <textarea formControlName="description" class="review-textarea"></textarea>
+            <div class="form-actions">
+                <div class="stars">
+                    @for(i of stars; track i){
+                    <fa-icon (click)="click(i)" [icon]="faStar" class="star"
+                        [ngClass]="num >= i ?'filled' : 'empty'"></fa-icon>
+                    }
+                </div>
+                <div class="form-button">
+                    <button type="submit" class="save-btn">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

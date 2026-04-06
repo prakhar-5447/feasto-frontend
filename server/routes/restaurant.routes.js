@@ -1,38 +1,39 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
 
 const restaurantController = require("../controllers/restaurant.controller");
 
-const auth = require("../middlewares/auth.middleware");
+const { protect } = require('../middlewares/auth.middleware');
 
 const role = require("../middlewares/role.middleware");
 
 const validate = require("../middlewares/validation.middleware");
 
-router.get("/nearby", restaurantController.getNearbyRestaurants);
-
 const {
     createRestaurantSchema
 } = require("../validations/restaurant.validation");
 
+router.get("/nearby", restaurantController.getNearbyRestaurants);
+
 router.post(
     "/",
-    auth,
-    role("restaurant"),
+    protect,
+    role("restaurant_partner"),
     validate(createRestaurantSchema),
     restaurantController.createRestaurant
 );
 
 router.get(
     "/my",
-    auth,
-    role("restaurant"),
+    protect,
+    role("restaurant_partner"),
     restaurantController.getMyRestaurant
 );
 
 router.put(
     "/:id",
-    auth,
-    role("restaurant"),
+    protect,
+    role("restaurant_partner"),
     restaurantController.updateRestaurant
 );
 

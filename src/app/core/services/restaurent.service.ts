@@ -6,4 +6,5 @@ import { Injectable } from '@angular/core';
 export class RestaurantService {
     restaurant: any
     menu: any
+    reviews: any
 }

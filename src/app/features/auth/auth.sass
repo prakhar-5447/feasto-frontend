@@ -1,157 +1,170 @@
 @use '../../../styles/index' as *
 
-.auth-card
+.modal-overlay
+    position: fixed
+    inset: 0
+    background: rgba(0,0,0,.5)
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: 1000
     width: 100%
-    background: $color-white
-    border-radius: 16px
-    padding: 32px
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1)
 
-    .header
-        text-align: center
-        margin-bottom: 32px
+    .auth-card
+        width: 100%
+        max-width: 480px
+        border-radius: 16px
+        background: $color-white
+        border-radius: 16px
+        padding: 32px
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1)
 
-        .icon-wrapper
-            width: 64px
-            height: 64px
-            margin: 0 auto 16px
-            display: flex
-            align-items: center
-            justify-content: center
-            background: $color-primary-light
-            border-radius: 999px
-
-            fa-icon
-                color: $color-primary
-                font-size: 28px
-
-        .title
-            font-size: 28px
-            font-weight: 700
-            color: $color-text-primary
-            margin-bottom: 8px
-
-        .subtitle
-            color: $color-text-secondary
-            font-size: 15px
-
-    .form
-        display: flex
-        flex-direction: column
-        gap: 12px
-
-        label
-            font-size: 14px
-            font-weight: 500
-            color: $color-text-dark
-            display: block
-
-        .phone-input
-            display: flex
-            gap: 8px
-            margin-bottom: 12px
-
-            .country-code
+        .header
+            text-align: center
+            margin-bottom: 32px
+            .icon-wrapper
                 width: 64px
+                height: 64px
+                margin: 0 auto 16px
                 display: flex
                 align-items: center
                 justify-content: center
-                border: 1px solid $color-border
-                border-radius: 8px
-                background: $color-white
+                background: $color-primary-light
+                border-radius: 999px
+
+                fa-icon
+                    color: $color-primary
+                    font-size: 28px
+
+            .title
+                font-size: 28px
+                font-weight: 600
+                color: $color-text-primary
+
+            .subtitle
+                color: $color-text-secondary
+                font-size: 15px
+                button
+                    background: none
+                    border: none
+                    color: $color-primary
+                    font-weight: 500
+                    cursor: pointer
+                    padding: 0
+                    width: auto
+                    margin-left: 6px
+        .form
+            display: flex
+            flex-direction: column
+            margin-bottom: 8px
+            gap: 8px
+
+            label
+                font-size: 14px
                 font-weight: 500
                 color: $color-text-dark
+                display: block
 
-            input
+            .phone-input
+                display: flex
+                gap: 8px
+                margin-bottom: 12px
+
+                .country-code
+                    width: 64px
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    border: 1px solid $color-border
+                    border-radius: 8px
+                    background: $color-white
+                    font-weight: 500
+                    color: $color-text-dark
+
+                input
+                    width: 100%
+                    padding: 10px 12px
+                    border-radius: 8px
+                    border: 1px solid $color-border
+                    font-size: 14px
+                    background-color: #f0f0f0
+                    &:focus
+                        outline: none
+                        border-color: $color-text-muted
+                        box-shadow: 0 0 0 2px rgba(0,0,0, 0.1)
+            .input
+                margin-bottom: 8px
+                input
+                    width: 100%
+                    padding: 10px 12px
+                    border-radius: 8px
+                    border: 1px solid $color-border
+                    font-size: 14px
+                    background-color: #f0f0f0
+                    &:focus
+                        outline: none
+                        border-color: $color-text-muted
+                        box-shadow: 0 0 0 2px rgba(0,0,0, 0.1)
+
+            .otp-container
+                display: flex
+                justify-content: space-between
+                gap: 8px
+                margin-bottom: 10px
+
+                input
+                    width: 48px
+                    height: 52px
+                    text-align: center
+                    font-size: 20px
+                    border-radius: 6px
+                    border: 1px solid $color-border
+                    &:focus
+                        outline: none
+                        border-color: $color-text-muted
+                        box-shadow: 0 0 0 2px rgba(0,0,0, 0.1)
+                    &.filled
+                        border-width: 2px
+                        border-color: #16a34a
+            button
                 width: 100%
-                padding: 10px 12px
-                border-radius: 8px
-                border: 1px solid $color-border
+                border: none
+                border-radius: 10px
+                padding: 14px
+                font-weight: 600
+                cursor: pointer
+                background: $color-primary
+                color: $color-white
+                transition: background 0.2s ease
+                &:hover
+                    background: $color-primary-hover
+
+                &:disabled
+                    background: $color-border
+                    cursor: default
+
+            .resend
+                display: flex
+                align-items: center
+                justify-content: center
                 font-size: 14px
-                background-color: #f0f0f0
-                &:focus
-                    outline: none
-                    border-color: $color-text-muted
-                    box-shadow: 0 0 0 2px rgba(0,0,0, 0.1)
-        .otp-container
-            display: flex
-            justify-content: space-between
-            gap: 8px
-            margin-bottom: 10px
-
-            input
-                width: 48px
-                height: 52px
-                text-align: center
-                font-size: 20px
-                border-radius: 6px
-                border: 1px solid $color-border
-                &:focus
-                    outline: none
-                    border-color: $color-text-muted
-                    box-shadow: 0 0 0 2px rgba(0,0,0, 0.1)
-        button
-            width: 100%
-            border: none
-            border-radius: 10px
-            padding: 14px
-            font-weight: 600
-            cursor: pointer
-            background: $color-primary
-            color: $color-white
-            transition: background 0.2s ease
-            &:hover
-                background: $color-primary-hover
-
-            &:disabled
-                background: $color-border
-                cursor: default
+                color: $color-text-secondary
+                font-weight: 400
+                gap: 8px
+                button
+                    width: auto
+                    background: none
+                    border: none
+                    font-size: 14px
+                    font-weight: 600
+                    color: $color-primary
+                    cursor: pointer
+                    padding: 0
+                    &:disabled
+                        color: $color-text-muted
 
         .terms
             text-align: center
-            font-size: 12px
+            font-size: 14px
+            font-weight: 400
             color: $color-text-muted
-
-        .otp-info
-            display: flex
-            align-items: center
-            justify-content: flex-start
-            gap: 4px
-
-            align-items: center
-            font-size: 14px
-            color: $color-text-secondary
-
-            button
-                background: none
-                border: none
-                color: $color-primary
-                font-weight: 500
-                cursor: pointer
-                padding: 0
-                width: auto
-                margin-left: 6px
-
-        .resend
-            display: flex
-            justify-content: flex-end
-            align-items: center
-            text-align: center
-            font-size: 14px
-            color: $color-text-secondary
-            gap: 8px
-
-            button
-                width: auto
-                background: none
-                border: none
-                font-size: 14px
-                color: $color-primary
-                font-weight: 600
-                cursor: pointer
-                padding: 0
-
-    .terms
-        text-align: center
-        font-size: 14px
-        color: $color-text-muted

@@ -8,7 +8,7 @@
         max-width: 1200px
         margin: 0 auto
         padding: 0 16px
-        height: 72px
+        height: 86px
         display: flex
         align-items: center
         justify-content: space-between
@@ -69,7 +69,6 @@
                             &:focus
                                 outline: none
                                 border-color: $color-text-muted
-                            
 
                     .dropdown
                         position: absolute
@@ -116,9 +115,12 @@
                                 p
                                     color: $color-text-muted
                                     font-size: 14px
-                            fa-icon
-                                font-size: 18px
-                                color: $color-primary
+                            .loader-area
+                                width: 20px
+                                height: 20px
+                                fa-icon
+                                    font-size: 18px
+                                    color: $color-primary
                             &:hover
                                 background: #f8f8f8
 
@@ -148,6 +150,30 @@
                 background: $color-primary
                 color: $color-white
                 font-weight: 600
+            .navbar-user
+                display: flex
+                align-items: center
+                gap: 12px
+                cursor: pointer
+                padding: 6px 10px
+
+                .avatar
+                    width: 36px
+                    height: 36px
+                    border-radius: 50%
+                    background: $color-primary
+                    font-size: 14px
+                    font-weight: 600
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    color: $color-white
+
+                .info
+                    .name
+                        color: $color-black
+                        font-size: 16px
+                        font-weight: 600
 
 @media (max-width: 968px)
     .header

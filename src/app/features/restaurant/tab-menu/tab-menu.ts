@@ -9,6 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-tab-menu',
+  standalone: true,
   imports: [NgClass, FontAwesomeModule],
   templateUrl: './tab-menu.html',
   styleUrl: './tab-menu.sass',

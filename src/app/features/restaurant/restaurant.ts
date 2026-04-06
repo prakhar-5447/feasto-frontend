@@ -412,6 +412,7 @@ export class Restaurant {
     this.menu = this.restaurantMenus[this.id];
     this.restaurantService.menu = this.menu
     this.reviews = this.restaurantReviews[this.id] || [];
+    this.restaurantService.reviews = this.reviews
   }
 
 

@@ -46,11 +46,6 @@ const restaurantSchema = new mongoose.Schema({
         default: 0
     },
 
-    rating: {
-        type: Number,
-        default: 0
-    },
-
     isOpen: {
         type: Boolean,
         default: true
@@ -60,4 +55,4 @@ const restaurantSchema = new mongoose.Schema({
 
 restaurantSchema.index({ location: "2dsphere", name: "text", cuisine: "text" });
 
-module.exports = mongoose.model("Restaurant", restaurantSchema);
+module.exports = mongoose.models.Restaurant || mongoose.model("Restaurant", restaurantSchema);

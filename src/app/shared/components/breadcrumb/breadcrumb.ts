@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
@@ -12,17 +12,19 @@ export class Breadcrumb {
   breadcrumbs: any[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+     private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
-        this.breadcrumbs = this.buildBreadcrumb(this.route.root);
+        console.log("i am running");
+        this.breadcrumbs = [...this.buildBreadcrumb(this.router.routerState.root)];
+        this.cd.markForCheck();
       });
-    this.breadcrumbs = this.buildBreadcrumb(this.route.root);
+    this.breadcrumbs = [...this.buildBreadcrumb(this.router.routerState.root)];
   }
 
   buildBreadcrumb(route: ActivatedRoute, url: string = '', breadcrumbs: any[] = []): any[] {

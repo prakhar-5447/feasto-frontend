@@ -1,9 +1,10 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
 
 const foodController = require("../controllers/food.controller");
 
-const auth = require("../middlewares/auth.middleware");
-const role = require("../middlewares/role.middleware");
+const { protect } = require('../middlewares/auth.middleware');
+
 const upload = require("../middlewares/upload.middleware");
 
 const validate = require("../middlewares/validation.middleware");
@@ -14,29 +15,26 @@ const {
 
 router.post(
     "/:restaurantId",
-    auth,
-    role("restaurant"),
+    protect,
     validate(createFoodSchema),
     upload.single("image"),
     foodController.addFood
 );
 
 router.get(
-    "/restaurant/:restaurantId",
+    "/:restaurantId",
     foodController.getRestaurantMenu
 );
 
 router.put(
-    "/:id",
-    auth,
-    role("restaurant"),
+    "restaurant/item/:id",
+    protect,
     foodController.updateFood
 );
 
 router.delete(
-    "/:id",
-    auth,
-    role("restaurant"),
+    "restaurant/item/:id",
+    protect,
     foodController.deleteFood
 );
 

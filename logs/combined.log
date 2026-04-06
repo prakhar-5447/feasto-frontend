@@ -161,3 +161,54 @@
 {"level":"info","message":"::1 - - [24/Mar/2026:12:24:02 +0000] \"GET /api/v1/users/me HTTP/1.1\" 200 236 \"http://localhost:4200/india/hyderabad\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0\"","timestamp":"2026-03-24T12:24:02.226Z"}
 {"level":"info","message":"::1 - - [24/Mar/2026:12:24:03 +0000] \"POST /api/v1/auth/logout HTTP/1.1\" 200 52 \"http://localhost:4200/india/hyderabad\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0\"","timestamp":"2026-03-24T12:24:03.446Z"}
 {"level":"info","message":"::1 - - [24/Mar/2026:12:24:03 +0000] \"GET /api/v1/users/me HTTP/1.1\" 401 26 \"http://localhost:4200/india/hyderabad\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0\"","timestamp":"2026-03-24T12:24:03.715Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:09:47:22 +0000] \"GET /api/v1/users/me HTTP/1.1\" 401 26 \"http://localhost:4200/india/hyderabad\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0\"","timestamp":"2026-03-26T09:47:22.672Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:17:14 +0000] \"POST /api/v1/auth/complete-profile HTTP/1.1\" 500 841 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:17:14.984Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:17:23 +0000] \"POST /api/v1/auth/complete-profile HTTP/1.1\" 200 254 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:17:23.295Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:17:41 +0000] \"POST /api/v1/auth/complete-profile HTTP/1.1\" 500 1281 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:17:41.126Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:27:17 +0000] \"POST /api/v1/auth/complete-profile HTTP/1.1\" 500 1115 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:27:17.613Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:28:12 +0000] \"POST /api/v1/auth/complete-profile HTTP/1.1\" 200 17 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:28:12.153Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:28:25 +0000] \"POST /api/v1/auth/complete-profile HTTP/1.1\" 200 264 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:28:25.781Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:33:20 +0000] \"POST /api/v1/auth/phone-auth HTTP/1.1\" 200 311 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:33:20.740Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:33:28 +0000] \"POST /api/v1/auth/phone-auth HTTP/1.1\" 200 321 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:33:28.820Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:39:19 +0000] \"POST /api/v1/auth/phone-auth HTTP/1.1\" 200 321 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:39:19.931Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:41:40 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:41:40.883Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:43:03 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:43:03.078Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:44:34 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:44:34.732Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:44:40 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:44:40.109Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:45:37 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:45:37.651Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:46:08 +0000] \"POST /api/v1/auth/phone-auth HTTP/1.1\" 200 321 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:46:08.263Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:46:09 +0000] \"GET /api/v1/users/me HTTP/1.1\" 401 26 \"http://localhost:4200/india/hyderabad\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0\"","timestamp":"2026-03-26T12:46:09.228Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:46:54 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:46:54.323Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:47:28 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:47:28.577Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:47:46 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:47:46.536Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:47:51 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:47:51.683Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:48:32 +0000] \"GET /api/v1/restaurant/ HTTP/1.1\" 302 - \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:48:32.957Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:49:22 +0000] \"GET /api/v1/restaurant/my HTTP/1.1\" 302 - \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:49:22.326Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:50:30 +0000] \"GET /api/v1/restaurant/my HTTP/1.1\" 302 - \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:50:30.971Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:50:40 +0000] \"GET /api/v1/restaurant/my HTTP/1.1\" 302 - \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:50:40.055Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:50:58 +0000] \"GET /api/v1/restaurant/my HTTP/1.1\" 302 - \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:50:58.829Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:52:26 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:52:26.188Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:53:48 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1366 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:53:48.014Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:55:21 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1367 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:55:21.975Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:55:52 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1367 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:55:52.825Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:57:26 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1367 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:57:26.782Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:12:58:26 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1367 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T12:58:26.327Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:00:17 +0000] \"POST /api/v1/restaurant HTTP/1.1\" 500 1367 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:00:17.127Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:00:33 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 500 1367 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:00:33.339Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:01:59 +0000] \"POST /api/v1/restaurant/ HTTP/1.1\" 404 158 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:01:59.994Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:02:06 +0000] \"POST /api/v1/restaurant HTTP/1.1\" 404 157 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:02:06.221Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:03:27 +0000] \"POST /api/v1/restaurants HTTP/1.1\" 401 26 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:03:27.533Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:04:33 +0000] \"POST /api/v1/restaurants HTTP/1.1\" 403 27 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:04:33.700Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:04:46 +0000] \"POST /api/v1/auth/phone-auth HTTP/1.1\" 200 321 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:04:46.069Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:05:04 +0000] \"POST /api/v1/restaurants HTTP/1.1\" 403 27 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:05:04.734Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:06:33 +0000] \"POST /api/v1/restaurants HTTP/1.1\" 403 27 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:06:33.034Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:07:46 +0000] \"POST /api/v1/restaurants HTTP/1.1\" 403 27 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:07:46.889Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:10:25 +0000] \"POST /api/v1/auth/me HTTP/1.1\" 404 154 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:10:25.861Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:10:32 +0000] \"GET /api/v1/auth/me HTTP/1.1\" 404 153 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:10:32.393Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:10:58 +0000] \"GET /api/v1/user/me HTTP/1.1\" 404 153 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:10:58.543Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:11:09 +0000] \"GET /api/v1/users/me HTTP/1.1\" 200 303 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:11:09.139Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:12:12 +0000] \"POST /api/v1/restaurants HTTP/1.1\" 403 27 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:12:12.031Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:15:15 +0000] \"POST /api/v1/auth/complete-profile HTTP/1.1\" 200 264 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:15:15.732Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:16:09 +0000] \"POST /api/v1/restaurants HTTP/1.1\" 403 27 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:16:09.399Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:17:13 +0000] \"POST /api/v1/auth/phone-auth HTTP/1.1\" 200 321 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:17:13.383Z"}
+{"level":"info","message":"::1 - - [26/Mar/2026:13:17:41 +0000] \"POST /api/v1/auth/complete-profile HTTP/1.1\" 200 264 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:17:41.575Z"}
