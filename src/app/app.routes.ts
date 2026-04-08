@@ -7,7 +7,8 @@ import { Location } from './features/location/location';
 import { Restaurant } from './features/restaurant/restaurant';
 import { TabMenu } from './features/restaurant/tab-menu/tab-menu';
 import { TabReviews } from './features/restaurant/tab-reviews/tab-reviews';
-import { TabCart } from './features/restaurant/tab-cart/tab-cart';
+import { Cart } from './features/cart/cart';
+import { RestaurantResolver } from './shared/pipes/resolver';
 
 export const routes: Routes = [
     {
@@ -53,15 +54,19 @@ export const routes: Routes = [
                                 data: { breadcrumb: 'Reviews' },
 
                             },
-                            {
-                                path: 'cart',
-                                loadComponent: () => TabCart,
-                                data: { breadcrumb: 'Cart' },
-
-                            },
                         ]
 
                     },
+                    {
+                        path: ':restaurant/cart',
+                        loadComponent: () => Cart,
+                        resolve: {
+                            restaurant: RestaurantResolver
+                        },
+                        data: {
+                            breadcrumb: 'cart'
+                        }
+                    }
                 ]
             },
 

@@ -1,0 +1,108 @@
+@use '../../../../styles/index' as *
+
+.coupon
+    background: $color-white
+    padding: 20px
+    border-radius: 8px
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05)
+    .header
+        font-weight: 600
+        margin-bottom: 10px
+        h3
+            font-size: 18px
+            fa-icon
+                color: $color-primary
+    .applied
+        display: flex
+        justify-content: space-between
+        background: #1fcc5e1d
+        border: 1px solid #1fcc5e
+        padding: 10px
+        border-radius: 8px
+
+        .code
+            color: #1fcc5e
+            font-size: 16px
+            font-weight: 600
+
+        .desc
+            font-size: 12px
+            font-weight: 500
+            color: #1fcc5e
+
+        button
+            color: #d62121
+            font-size: 14px
+            font-weight: 600
+            border: none
+            background: transparent
+            cursor: pointer
+
+    .input
+        display: flex
+        gap: 10px
+        margin-bottom: 10px
+
+        input
+            flex: 1
+            padding: 8px
+            border-radius: 6px
+            border: 1px solid $color-border
+            font-size: 14px
+            background-color: #f0f0f0
+            &:focus
+                outline: none
+                border-color: $color-text-muted
+
+        button
+            cursor: pointer
+            background: $color-primary
+            color: $color-white
+            padding: 8px 12px
+            border: none
+            border-radius: 6px
+
+    .toggle
+        color: $color-primary
+        font-size: 14px
+        font-weight: 600
+        border: none
+        background: transparent
+        cursor: pointer
+
+    .list
+        max-height: 380px
+        overflow-y: scroll
+        margin-top: 10px
+        display: flex
+        flex-direction: column
+        gap: 10px
+        .item
+            display: flex
+            justify-content: space-between
+            border: 1px solid #eee
+            padding: 10px
+            border-radius: 8px
+
+            &.disabled
+                opacity: 0.5
+
+            .code
+                font-size: 16px
+                font-weight: 600
+
+            .desc
+                font-size: 12px
+                font-weight: 500
+                color: $color-text-secondary
+
+            .warn
+                font-size: 12px
+                color: #d62121
+            button
+                color: $color-primary
+                font-size: 14px
+                font-weight: 600
+                border: none
+                background: transparent
+                cursor: pointer

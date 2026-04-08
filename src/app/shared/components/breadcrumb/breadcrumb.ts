@@ -13,7 +13,7 @@ export class Breadcrumb {
 
   constructor(
     private router: Router,
-     private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -45,14 +45,31 @@ export class Breadcrumb {
     if (label === 'restaurant') {
       label = child.snapshot.params['restaurant'];
     }
+    if (label === 'cart') {
+      const restaurantParam = child.snapshot.params['restaurant'];
 
-    label = label.split('-')
-      .filter(Boolean)
-      .map((word: string) =>
-        word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-      )
-      .join(" ")
+      if (restaurantParam) {
+        const formattedRestaurant = restaurantParam
+          .split('-')
+          .filter(Boolean)
+          .map((word: string) =>
+            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+          )
+          .join(" ");
+
+        breadcrumbs.push({
+          label: formattedRestaurant,
+          url: url.replace('/cart', '') // 👈 restaurant URL
+        });
+      }
+    }
     if (label) {
+      label = label.split('-')
+        .filter(Boolean)
+        .map((word: string) =>
+          word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join(" ")
       breadcrumbs.push({ label, url });
     }
 

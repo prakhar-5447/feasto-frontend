@@ -1,5 +1,15 @@
 import { Injectable } from '@angular/core';
+import { RestaurantService } from './restaurent.service';
 
+export interface Coupon {
+    id: number,
+    code: string;
+    description: string;
+    discount: number;
+    discountType: "percentage" | "flat";
+    minOrder: number;
+    maxDiscount?: number;
+}
 export interface CartItem {
     id: string;
     name: string;
@@ -14,37 +24,137 @@ export interface CartItem {
     providedIn: 'root',
 })
 export class CartService {
-    cart: CartItem[] = [];
-    restaurantId: string | null = null;
 
-    constructor() {
-        this.loadCart();
+
+    private appliedCoupon: Coupon | null = null;
+
+    // 🔥 Dummy coupons (replace later with API)
+    private coupons: Coupon[] = [
+        {
+            id: 1,
+            code: "FEAST50",
+            description: "50% off up to ₹100 on orders above ₹199",
+            discount: 50,
+            discountType: "percentage",
+            minOrder: 199,
+            maxDiscount: 100,
+        },
+        {
+            id: 2,
+            code: "FLAT100",
+            description: "Flat ₹100 off on orders above ₹299",
+            discount: 100,
+            discountType: "flat",
+            minOrder: 299,
+        },
+        {
+            id: 3,
+            code: "WELCOME30",
+            description: "30% off up to ₹150 on orders above ₹149",
+            discount: 30,
+            discountType: "percentage",
+            minOrder: 149,
+            maxDiscount: 150,
+        },
+        {
+            id: 4,
+            code: "SAVE60",
+            description: "Flat ₹60 off on orders above ₹199",
+            discount: 60,
+            discountType: "flat",
+            minOrder: 199,
+        },
+        {
+            id: 5,
+            code: "MEGA200",
+            description: "Flat ₹200 off on orders above ₹499",
+            discount: 200,
+            discountType: "flat",
+            minOrder: 499,
+        }
+    ];
+
+    constructor(private restaurantService: RestaurantService) { }
+
+    // ✅ Apply Coupon
+    applyCoupon(code: string): { success: boolean; message: string } {
+        const coupon = this.coupons.find(c => c.code === code.toUpperCase());
+
+        if (!coupon) {
+            return { success: false, message: 'Invalid coupon' };
+        }
+
+        const total = this.getTotal();
+
+        if (coupon.minOrder && total < coupon.minOrder) {
+            return {
+                success: false,
+                message: `Minimum order ₹${coupon.minOrder} required`
+            };
+        }
+
+        this.appliedCoupon = coupon;
+
+        return { success: true, message: 'Coupon applied successfully' };
     }
 
+    // ✅ Remove Coupon
+    removeCoupon() {
+        this.appliedCoupon = null;
+    }
+
+    // ✅ Get Discount Amount
+    getDiscount(): number {
+        if (!this.appliedCoupon) return 0;
+
+        const total = this.getTotal();
+
+        if (this.appliedCoupon.discountType === 'flat') {
+            return this.appliedCoupon.discount;
+        }
+
+        if (this.appliedCoupon.discountType === 'percentage') {
+            let discount = (total * this.appliedCoupon.discount) / 100;
+
+            if (this.appliedCoupon.maxDiscount) {
+                discount = Math.min(discount, this.appliedCoupon.maxDiscount);
+            }
+
+            return Math.round(discount);
+        }
+
+        return 0;
+    }
+
+    // ✅ Get Applied Coupon
+    getAppliedCoupon(): Coupon | null {
+        return this.appliedCoupon;
+    }
     // ✅ Add item
     addToCart(item: Omit<CartItem, 'quantity'>): boolean {
-        // Restrict multiple restaurants
-        if (this.restaurantId && this.restaurantId !== item.restaurantId) {
+        const rs = this.restaurantService;
+
+        if (rs.restaurantId && rs.restaurantId !== item.restaurantId) {
             return false;
         }
 
-        this.restaurantId = item.restaurantId;
+        rs.restaurantId = item.restaurantId;
 
-        const existingItem = this.cart.find((i) => i.id === item.id);
+        const existingItem = rs.cart.find((i) => i.id === item.id);
 
         if (existingItem) {
             existingItem.quantity++;
         } else {
-            this.cart.push({ ...item, quantity: 1 });
+            rs.cart.push({ ...item, quantity: 1 });
         }
 
-        this.saveCart();
+        rs.persist();
         return true;
     }
 
-    // ✅ Update quantity
     updateQuantity(itemId: string, quantity: number) {
-        const item = this.cart.find((i) => i.id === itemId);
+        const rs = this.restaurantService;
+        const item = rs.cart.find((i) => i.id === itemId);
 
         if (!item) return;
 
@@ -54,55 +164,41 @@ export class CartService {
             item.quantity = quantity;
         }
 
-        this.saveCart();
+        rs.persist();
     }
 
-    // ✅ Remove item
     removeFromCart(itemId: string) {
-        this.cart = this.cart.filter((i) => i.id !== itemId);
+        const rs = this.restaurantService;
 
-        // Reset restaurant if cart empty
-        if (this.cart.length === 0) {
-            this.restaurantId = null;
+        rs.cart = rs.cart.filter((i) => i.id !== itemId);
+
+        if (rs.cart.length === 0) {
+            rs.restaurantId = null;
         }
 
-        this.saveCart();
+        rs.persist();
     }
 
-    // ✅ Clear cart
     clearCart() {
-        this.cart = [];
-        this.restaurantId = null;
-        this.saveCart();
+        const rs = this.restaurantService;
+
+        rs.cart = [];
+        rs.restaurantId = null;
+
+        rs.persist();
     }
 
-    // ✅ Get total price
     getTotal(): number {
-        return this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        return this.restaurantService.cart.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+        );
     }
 
-    // ✅ Get total items count
     getItemCount(): number {
-        return this.cart.reduce((sum, item) => sum + item.quantity, 0);
-    }
-
-    // ✅ Persist to localStorage
-    private saveCart() {
-        // localStorage.setItem('cart', JSON.stringify(this.cart));
-        // localStorage.setItem('restaurantId', this.restaurantId || '');
-    }
-
-    // ✅ Load from localStorage
-    private loadCart() {
-        // const cartData = localStorage.getItem('cart');
-        // const restaurantId = localStorage.getItem('restaurantId');
-
-        // if (cartData) {
-        //     this.cart = JSON.parse(cartData);
-        // }
-
-        // if (restaurantId) {
-        //     this.restaurantId = restaurantId;
-        // }
+        return this.restaurantService.cart.reduce(
+            (sum, item) => sum + item.quantity,
+            0
+        );
     }
 }

@@ -1,0 +1,55 @@
+<div class="coupon">
+    <div class="header">
+        <h3>
+            <fa-icon [icon]="faTags"></fa-icon> Apply Coupon
+        </h3>
+    </div>
+
+    <!-- APPLIED -->
+    @if(appliedCoupon){
+    <div class="applied">
+        <div class="info">
+            <div class="code">{{ appliedCoupon.code }}</div>
+            <div class="desc">Coupon applied successfully</div>
+        </div>
+
+        <button class="remove" (click)="removeCoupon()">Remove</button>
+    </div> }
+
+    <!-- APPLY -->
+    @else {
+    <div class="input">
+        <input type="text" placeholder="Enter coupon code" [(ngModel)]="couponCode" />
+        <button (click)="handleApplyCouponCode()" [disabled]="!couponCode">
+            Apply
+        </button>
+    </div>
+    <button class="toggle" (click)="showCoupons = !showCoupons">
+        View all coupons
+    </button>
+
+    <!-- LIST -->
+    @if(showCoupons){
+    <div class="list">
+        @for(coupon of availableCoupons;track coupon.id){
+        <div class="item" [class.disabled]="itemTotal < (coupon.minOrder || 0)">
+            <div class="left">
+                <div class="code">{{ coupon.code }}</div>
+
+                <div class="desc">
+                    {{ coupon.description }}
+                </div>
+                @if(itemTotal < (coupon.minOrder || 0)){ <div class="warn">
+                    Add ₹{{ (coupon.minOrder || 0) - itemTotal }} more
+            </div>
+            }
+        </div>
+        <button (click)="handleApplyCoupon(coupon)" [disabled]="itemTotal < (coupon.minOrder || 0)">
+            Apply
+        </button>
+    </div>
+    }
+</div>
+}
+}
+</div>

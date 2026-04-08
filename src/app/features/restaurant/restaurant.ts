@@ -421,7 +421,7 @@ export class Restaurant {
   }
 
   get cartItems() {
-    return this.cartService.cart.filter((i: any) => i.restaurantId === this.id);
+    return this.restaurantService.cart.filter((i: any) => i.restaurantId === this.id);
   }
 
   get cartTotal() {

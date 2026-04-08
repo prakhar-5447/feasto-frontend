@@ -59,7 +59,7 @@ export class TabMenu {
   }
 
   getItemQuantity(itemId: string): number {
-    const item = this.cartService.cart.find((i: any) => i.id === itemId);
+    const item = this.restaurantService.cart.find((i: any) => i.id === itemId);
     return item?.quantity || 0;
   }
 
@@ -75,7 +75,5 @@ export class TabMenu {
     const newQty = inc ? qty + 1 : qty - 1;
     this.cartService.updateQuantity(itemId, newQty);
   }
-
-
 
 }
