@@ -5,7 +5,6 @@ require('dotenv').config();
 const mongoSanitize = require('express-mongo-sanitize');
 const { apiLimiter, authLimiter } = require("./middlewares/rateLimit.middleware");
 const { securityMiddleware } = require("./middlewares/security.middleware");
-const loggerMiddleware = require("./middlewares/logger.middleware");
 
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
@@ -27,11 +26,19 @@ securityMiddleware.forEach(m => app.use(m));
 //   }
 //   next();
 // });
-app.use(loggerMiddleware);
 
-app.use("", apiLimiter);
-app.use("/v1/auth", authLimiter, authRoutes);
-app.use('/v1/users', authLimiter, userRoutes);
+app.post('/logs', (req, res) => {
+  // 🔥 do nothing — logger middleware already handles it
+  res.sendStatus(200);
+});
+
+// ✅ Rate limiting (after security)
+app.use("/v1/auth", authLimiter);
+app.use("/v1", apiLimiter);
+
+// ✅ Routes
+app.use("/v1/auth", authRoutes);
+app.use('/v1/users', userRoutes);
 app.use("/v1/restaurants", restaurantRoutes);
 app.use("/v1/foods", foodRoutes);
 // app.use("/v1/cart", cartRoutes);

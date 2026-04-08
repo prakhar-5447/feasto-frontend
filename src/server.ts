@@ -9,6 +9,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import { join } from 'node:path';
 import dotenv from 'dotenv';
+import { requestLogger } from '../server/utils/requestLogger';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -23,13 +24,20 @@ const connectDB = require('../server/config/db');
 
 // 🔥 Connect MongoDB
 connectDB();
+app.use((req, res, next) => {
+  // 🚫 Skip SSR logging for API routes
+  if (req.originalUrl.startsWith('/api')) {
+    return next();
+  }
 
+  requestLogger('SSR')(req, res, next);
+});
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 🔥 Mount backend API
-app.use('/api', backendApp);
+app.use('/api', requestLogger('API'), backendApp);
 
 
 // ================== EXISTING MAPBOX APIs ==================

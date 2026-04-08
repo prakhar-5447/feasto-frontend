@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { LoggerService } from '../../../core/services/logger.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -13,15 +14,16 @@ export class Breadcrumb {
 
   constructor(
     private router: Router,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private logger: LoggerService
   ) { }
 
   ngOnInit() {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        console.log("i am running");
+      .subscribe((e) => {
         this.breadcrumbs = [...this.buildBreadcrumb(this.router.routerState.root)];
+        this.logger.logClientRoute(e.urlAfterRedirects);
         this.cd.markForCheck();
       });
     this.breadcrumbs = [...this.buildBreadcrumb(this.router.routerState.root)];
