@@ -1,4 +1,4 @@
-const Food = require("../models/food.model");
+import Food from "../models/food.model";
 
 export const createFood = async (data: any) => {
     return await Food.create(data);
@@ -12,7 +12,7 @@ export const findById = async (id: string) => {
     return await Food.findById(id);
 };
 
-export const updateFood = async (id: string, data: string) => {
+export const updateFood = async (id: string, data: any) => {
     return await Food.findByIdAndUpdate(id, data, { new: true });
 };
 
