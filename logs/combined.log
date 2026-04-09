@@ -212,3 +212,10 @@
 {"level":"info","message":"::1 - - [26/Mar/2026:13:16:09 +0000] \"POST /api/v1/restaurants HTTP/1.1\" 403 27 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:16:09.399Z"}
 {"level":"info","message":"::1 - - [26/Mar/2026:13:17:13 +0000] \"POST /api/v1/auth/phone-auth HTTP/1.1\" 200 321 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:17:13.383Z"}
 {"level":"info","message":"::1 - - [26/Mar/2026:13:17:41 +0000] \"POST /api/v1/auth/complete-profile HTTP/1.1\" 200 264 \"-\" \"PostmanRuntime/7.52.0\"","timestamp":"2026-03-26T13:17:41.575Z"}
+{"level":"info","message":"GET /","meta":{"duration":"104ms","ip":"::1","status":302,"type":"SSR","ua":"Mozilla/5.0"},"timestamp":"2026-04-09T09:47:55.601Z"}
+{"level":"info","message":"GET /india/raipur","meta":{"duration":"676ms","ip":"::1","status":200,"type":"SSR","ua":"Mozilla/5.0"},"timestamp":"2026-04-09T09:47:56.395Z"}
+{"level":"info","message":"GET /api/v1/users/me","meta":{"duration":"10555ms","ip":"::1","ref":"http://localhost:4200/india/raipur","status":500,"type":"API","ua":"Mozilla/5.0"},"timestamp":"2026-04-09T09:48:07.792Z"}
+{"level":"info","message":"GET /","meta":{"duration":"14ms","ip":"::1","status":302,"type":"SSR","ua":"Mozilla/5.0"},"timestamp":"2026-04-09T09:49:12.234Z"}
+{"level":"info","message":"GET /india/raipur","meta":{"duration":"2016ms","ip":"::1","status":200,"type":"SSR","ua":"Mozilla/5.0"},"timestamp":"2026-04-09T09:49:14.259Z"}
+{"level":"info","message":"GET /api/v1/users/me","meta":{"duration":"10544ms","ip":"::1","ref":"http://localhost:4200/india/raipur","status":500,"type":"API","ua":"Mozilla/5.0"},"timestamp":"2026-04-09T09:49:25.201Z"}
+{"level":"info","message":"POST /api/v1/auth/phone-auth","meta":{"duration":"10008ms","ip":"::1","ref":"http://localhost:4200/india/raipur","status":500,"type":"API","ua":"Mozilla/5.0"},"timestamp":"2026-04-09T09:49:37.315Z"}

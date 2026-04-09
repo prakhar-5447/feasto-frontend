@@ -6,7 +6,7 @@ exports.createReview = async (req, res, next) => {
 
         const review = await reviewService.createReview(
             req.user.id,
-            req.params.restaurantId,
+            req.params["restaurantId"],
             req.body
         );
 
@@ -26,7 +26,7 @@ exports.getRestaurantReviews = async (req, res, next) => {
     try {
 
         const reviews = await reviewService.getRestaurantReviews(
-            req.params.restaurantId
+            req.params["restaurantId"]
         );
 
         res.json({
@@ -45,7 +45,7 @@ exports.updateReview = async (req, res, next) => {
     try {
 
         const review = await reviewService.updateReview(
-            req.params.id,
+            req.params["id"],
             req.body
         );
 
