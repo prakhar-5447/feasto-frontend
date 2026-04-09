@@ -19,8 +19,8 @@ const angularApp = new AngularNodeAppEngine();
 dotenv.config();
 
 // 🔥 Backend imports
-const backendApp = require('../server/app');
-const connectDB = require('../server/config/db');
+import backendApp from '../server/app';
+import connectDB from '../server/config/db';
 
 // 🔥 Connect MongoDB
 connectDB();
