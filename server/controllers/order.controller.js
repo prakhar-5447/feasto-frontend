@@ -47,7 +47,7 @@ exports.getRestaurantOrders = async (req, res, next) => {
     try {
 
         const orders = await orderService.getRestaurantOrders(
-            req.params.restaurantId
+            req.params["restaurantId"]
         );
 
         res.json({
@@ -68,7 +68,7 @@ exports.updateOrderStatus = async (req, res, next) => {
     try {
 
         const order = await orderService.updateOrderStatus(
-            req.params.id,
+            req.params["id"],
             req.body.status
         );
 
