@@ -10,6 +10,9 @@ import cookieParser from 'cookie-parser';
 import { join } from 'node:path';
 import dotenv from 'dotenv';
 import { requestLogger } from '../server/utils/requestLogger';
+import { requestIdMiddleware } from '../server/middlewares/requestId.middleware';
+import { REQUEST_ID } from '../src/app/core/tokens/request-id.token';
+import { randomUUID } from 'crypto';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
@@ -24,14 +27,15 @@ const connectDB = require('../server/config/db');
 
 // 🔥 Connect MongoDB
 connectDB();
+app.use(requestIdMiddleware);
 app.use((req, res, next) => {
   // 🚫 Skip SSR logging for API routes
   if (req.originalUrl.startsWith('/api')) {
     return next();
   }
-
   requestLogger('SSR')(req, res, next);
 });
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -109,6 +113,7 @@ app.use(async (req, res, next) => {
       return res.redirect(`/india/${city}`);
     }
 
+    (globalThis as any).REQUEST_ID = req.requestId
     const response = await angularApp.handle(req);
 
     if (response) {

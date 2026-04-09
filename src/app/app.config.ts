@@ -11,6 +11,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authReducer } from './store/auth/auth.reducer';
 import { AuthEffects } from './store/auth/auth.effects';
+import { requestInterceptor } from './core/interceptors/request.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
       anchorScrolling: 'enabled'
     })), provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptors([
+      requestInterceptor,
       authInterceptor,
       errorInterceptor
     ]))

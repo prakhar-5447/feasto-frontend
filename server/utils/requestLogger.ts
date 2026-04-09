@@ -15,6 +15,7 @@ export const requestLogger = (type: 'API' | 'SSR') => {
       const logType = isClientLog ? 'CLIENT' : type;
       logger.info(`${method} ${path}`, {
         meta: {
+          requestId: req.requestId,
           type: logType,
           status: res.statusCode,
           duration: `${isClientLog ? req.body?.duration || 0 : duration}ms`,
